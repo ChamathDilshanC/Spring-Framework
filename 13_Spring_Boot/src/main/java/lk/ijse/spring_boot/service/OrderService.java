@@ -35,9 +35,12 @@ public class OrderService {
             return false;
         }
 
+        //Optional කියන්නේ Java 8 එක්ක හඳුන්වා දුන් object එකක්. මේක හදලා තියෙන්නේ null values හැසිරවීම වඩාත් ආරක්ෂිත විදිහට කරන්න.
+        // පාරිභෝගිකයා ඉන්නවද කියලා check කරනවා
         Optional<Customer> customer = customerRepo.findById(orderDTO.getCustomerId());
         if (customer.isEmpty()) {
             return false;
+            // පාරිභෝගිකයා නැත්නම් order එක save කරන්න බෑ
         }
 
         List<OrderDetail> orderDetails = new ArrayList<>();
@@ -47,6 +50,7 @@ public class OrderService {
 
             if (item.isEmpty()) {
                 return false;
+                // Item එක නැත්නම් order එක save කරන්න බෑ
             }
 
             Item itemEntity = item.get();
