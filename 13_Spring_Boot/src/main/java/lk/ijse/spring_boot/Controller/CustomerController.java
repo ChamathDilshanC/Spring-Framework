@@ -40,6 +40,6 @@ public class    CustomerController {
     }
     @GetMapping(path = "generateNextId")
     public ResponseUtil generateId(){
-        return new ResponseUtil(200, "Customer Id Generated", customerService.generateNextCustomerId());
+        return new ResponseUtil(201, "Customer Id Generated", customerService.generateNextCustomerId());
     }
 }

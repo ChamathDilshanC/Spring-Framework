@@ -71,5 +71,4 @@ public class CustomerServiceImpl implements CustomerService {
             return "C" + newNumber;
         }
     }
-
 }

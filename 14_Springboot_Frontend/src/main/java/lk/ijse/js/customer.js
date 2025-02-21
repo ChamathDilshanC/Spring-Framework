@@ -21,11 +21,12 @@ $("#saveCustomerBtn").click(function(event) {
         url: "http://localhost:8080/api/v1/customer/save",
         contentType: "application/json",
         data: JSON.stringify(customer),
-        success: function(data) {
-            if (data) {
+        success: function(response) {
+            if (response.code === 201) {
                 showToast('Customer saved successfully', 'success');
                 $("#customerForm")[0].reset();
                 loadCustomers();
+                generateNextCustomerId();
             } else {
                 showToast('Failed to save the customer','error');
             }
@@ -39,6 +40,11 @@ $("#saveCustomerBtn").click(function(event) {
 
 $("#updateCustomerBtn").click(function(event) {
     event.preventDefault();
+
+    if (!$("#customerName").val() || !$("#customerAddress").val()) {
+        showToast('Please fill all the fields', 'error');
+        return;
+    }
 
     var customerID = $("#customerId").val();
     var customerName = $("#customerName").val();
@@ -54,15 +60,17 @@ $("#updateCustomerBtn").click(function(event) {
         url: "http://localhost:8080/api/v1/customer/update",
         contentType: "application/json",
         data: JSON.stringify(customer),
-        success: function(data) {
-            if (data) {
+        success: function(response) {
+            if (response.code === 201) {
                 showToast('Customer updated successfully', 'success');
-                $("#customerForm")[0].reset();
+                resetForm();
                 loadCustomers();
-                $("#saveCustomerBtn").show()
             } else {
                 showToast('Failed to update the customer', 'error');
             }
+        },
+        error: function(xhr, status, error) {
+            showToast('Error updating customer: ' + error, 'error');
         }
     })
 });
@@ -90,6 +98,7 @@ function loadCustomers() {
 
                     var editBtn = $("<button>")
                         .addClass("btn btn-sm btn-icon")
+                        .css("background-color", "#fbbf24")
                         .html('<i class="fas fa-edit"></i>')
                         .click(function() {
                             editCustomer(customer);
@@ -106,8 +115,9 @@ function loadCustomers() {
                     row.append(actionsCell);
 
                     tbody.append(row);
-                    generateNextCustomerId()
                 });
+
+                updateTotalCustomers();
             } else {
                 $("#customerTable").hide();
                 $("#emptyTable").show();
@@ -123,13 +133,10 @@ function loadCustomers() {
 
 $(document).ready(function() {
     loadCustomers();
+    generateNextCustomerId();
 
     $("#resetFormBtn").click(function() {
-        $("#customerForm")[0].reset();
-        $("#formTitle").text("Add New Customer");
-        $("#customerId").prop("disabled", false);
-        $("#confirmDelete").removeClass("show");
-        resetForm()
+        resetForm();
     });
 
     $("#searchInput").on("input", function() {
@@ -140,9 +147,12 @@ $(document).ready(function() {
 
         if ($("#customerTableBody tr:visible").length === 0) {
             $("#emptyTable").show();
+            $("#customerTable").hide();
         } else {
             $("#emptyTable").hide();
+            $("#customerTable").show();
         }
+        updateTotalCustomers();
     });
 });
 
@@ -152,8 +162,8 @@ function editCustomer(customer) {
     $("#customerName").val(customer.name);
     $("#customerAddress").val(customer.address);
     $("#confirmDelete").removeClass("show");
-    // remove Customer Save Button
-    $("#saveCustomerBtn").hide()
+    $("#saveCustomerBtn").hide();
+    $("#updateCustomerBtn").show();
 
     if (window.innerWidth < 992) {
         $("#customerForm")[0].scrollIntoView({ behavior: 'smooth' });
@@ -166,14 +176,15 @@ function deleteCustomer(customer) {
     $("#customerName").val(customer.name).prop("disabled", true);
     $("#customerAddress").val(customer.address).prop("disabled", true);
     $("#saveCustomerBtn").prop("disabled", true);
+    $("#updateCustomerBtn").hide();
     $("#confirmDelete").addClass("show");
 
     $("#confirmDeleteBtn").off("click").on("click", function() {
         $.ajax({
             method: "DELETE",
             url: "http://localhost:8080/api/v1/customer/delete/" + customer.id,
-            success: function(data) {
-                if (data) {
+            success: function(response) {
+                if (response.code === 201) {
                     showToast("Customer deleted successfully", "success");
                     resetForm();
                     loadCustomers();
@@ -203,14 +214,12 @@ function resetForm() {
     $("#customerId").prop("disabled", false);
     $("#customerName").prop("disabled", false);
     $("#customerAddress").prop("disabled", false);
-    $("#saveCustomerBtn").prop("disabled", false).html('<i class="fas fa-save"></i> Save Customer');
+    $("#saveCustomerBtn").show().prop("disabled", false);
+    $("#updateCustomerBtn").hide();
     $("#confirmDelete").removeClass("show");
     generateNextCustomerId();
-    loadCustomers();
-
 }
 
-// Toast notification functions
 function showToast(message, type = 'success') {
     const toast = $('<div>').addClass('toast').addClass(type);
 
@@ -252,18 +261,23 @@ function showToast(message, type = 'success') {
     }, 5000);
 }
 
-function generateNextCustomerId (){
+function generateNextCustomerId() {
     $.ajax({
         method: "GET",
         url: "http://localhost:8080/api/v1/customer/generateNextId",
         success: function(response) {
-            $("#customerId").val(response.data);
-            $("#customerId").val(response.data).prop("disabled", true);
-            console.log(response.data);
+            if(response.data) {
+                $("#customerId").val(response.data).prop("disabled", true);
+            }
         },
         error: function(xhr, status, error) {
             showToast('Error generating customer ID: ' + error, 'error');
             console.error("AJAX Error: " + status + " - " + error);
         }
     });
+}
+
+function updateTotalCustomers() {
+    const visibleRows = $("#customerTableBody tr:visible").length;
+    $("#totalCustomers").text(`Total: ${visibleRows} customers`);
 }

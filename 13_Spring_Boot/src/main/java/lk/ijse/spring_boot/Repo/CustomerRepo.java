@@ -11,7 +11,6 @@ import java.util.List;
 @Repository
 public interface CustomerRepo extends JpaRepository<Customer, String> {
     Customer findFirstByOrderByIdDesc();
-
     // Query Methods
     /*
     *//*List<Customer> findByName(String name);

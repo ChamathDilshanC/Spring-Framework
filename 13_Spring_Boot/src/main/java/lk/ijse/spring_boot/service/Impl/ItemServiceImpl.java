@@ -53,4 +53,21 @@ public class ItemServiceImpl implements ItemService {
         }
     }
 
+    @Override
+    public String generateNextItemId() {
+        Item item = itemRepo.findFirstByOrderByItemCodeDesc();
+        if (item == null) {
+            return "I001";
+        } else {
+            String lastId = item.getItemCode();
+            int newId = Integer.parseInt(lastId.substring(1)) + 1;
+            if (newId < 10) {
+                return "I00" + newId;
+            } else if (newId < 100) {
+                return "I0" + newId;
+            } else {
+                return "I" + newId;
+            }
+        }
+    }
 }

@@ -9,4 +9,5 @@ public interface ItemService {
     void addItem(ItemDTO itemDTO);
     void updateItem(ItemDTO itemDTO);
     void deleteItem(String id);
+    String generateNextItemId();
 }

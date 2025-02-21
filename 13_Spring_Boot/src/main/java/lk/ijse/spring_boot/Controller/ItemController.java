@@ -38,4 +38,8 @@ public class ItemController {
         itemService.deleteItem(id);
         return new ResponseUtil(201, "Item Deleted Successfully", null);
     }
+    @GetMapping(path = "generateNextId")
+    public ResponseUtil generateId(){
+        return new ResponseUtil(201, "Item Id Generated", itemService.generateNextItemId());
+    }
 }
