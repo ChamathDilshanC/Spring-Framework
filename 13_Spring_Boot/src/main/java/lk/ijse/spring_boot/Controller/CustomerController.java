@@ -38,4 +38,8 @@ public class    CustomerController {
         customerService.deleteCustomer(id);
         return new ResponseUtil(201, "Customer Deleted Successfully", null);
     }
+    @GetMapping(path = "generateNextId")
+    public ResponseUtil generateId(){
+        return new ResponseUtil(200, "Customer Id Generated", customerService.generateNextCustomerId());
+    }
 }

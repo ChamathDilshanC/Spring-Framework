@@ -10,6 +10,8 @@ import java.util.List;
 
 @Repository
 public interface CustomerRepo extends JpaRepository<Customer, String> {
+    Customer findFirstByOrderByIdDesc();
+
     // Query Methods
     /*
     *//*List<Customer> findByName(String name);
@@ -17,4 +19,5 @@ public interface CustomerRepo extends JpaRepository<Customer, String> {
     @Query(value = "SELECT * FROM Customer", nativeQuery = true)
     void getAllCustomers();*//*
     boolean searchById(String id);*/
+    
 }

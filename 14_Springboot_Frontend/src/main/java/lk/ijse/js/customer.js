@@ -1,6 +1,11 @@
 $("#saveCustomerBtn").click(function(event) {
     event.preventDefault();
 
+    if (!$("#customerName").val() || !$("#customerAddress").val()) {
+        showToast('Please fill all the fields', 'error');
+        return;
+    }
+
     var customerID = $("#customerId").val();
     var customerName = $("#customerName").val();
     var customerAddress = $("#customerAddress").val();
@@ -54,6 +59,7 @@ $("#updateCustomerBtn").click(function(event) {
                 showToast('Customer updated successfully', 'success');
                 $("#customerForm")[0].reset();
                 loadCustomers();
+                $("#saveCustomerBtn").show()
             } else {
                 showToast('Failed to update the customer', 'error');
             }
@@ -100,6 +106,7 @@ function loadCustomers() {
                     row.append(actionsCell);
 
                     tbody.append(row);
+                    generateNextCustomerId()
                 });
             } else {
                 $("#customerTable").hide();
@@ -122,6 +129,7 @@ $(document).ready(function() {
         $("#formTitle").text("Add New Customer");
         $("#customerId").prop("disabled", false);
         $("#confirmDelete").removeClass("show");
+        resetForm()
     });
 
     $("#searchInput").on("input", function() {
@@ -144,6 +152,8 @@ function editCustomer(customer) {
     $("#customerName").val(customer.name);
     $("#customerAddress").val(customer.address);
     $("#confirmDelete").removeClass("show");
+    // remove Customer Save Button
+    $("#saveCustomerBtn").hide()
 
     if (window.innerWidth < 992) {
         $("#customerForm")[0].scrollIntoView({ behavior: 'smooth' });
@@ -195,6 +205,9 @@ function resetForm() {
     $("#customerAddress").prop("disabled", false);
     $("#saveCustomerBtn").prop("disabled", false).html('<i class="fas fa-save"></i> Save Customer');
     $("#confirmDelete").removeClass("show");
+    generateNextCustomerId();
+    loadCustomers();
+
 }
 
 // Toast notification functions
@@ -237,4 +250,20 @@ function showToast(message, type = 'success') {
             toast.remove();
         }, 300);
     }, 5000);
+}
+
+function generateNextCustomerId (){
+    $.ajax({
+        method: "GET",
+        url: "http://localhost:8080/api/v1/customer/generateNextId",
+        success: function(response) {
+            $("#customerId").val(response.data);
+            $("#customerId").val(response.data).prop("disabled", true);
+            console.log(response.data);
+        },
+        error: function(xhr, status, error) {
+            showToast('Error generating customer ID: ' + error, 'error');
+            console.error("AJAX Error: " + status + " - " + error);
+        }
+    });
 }

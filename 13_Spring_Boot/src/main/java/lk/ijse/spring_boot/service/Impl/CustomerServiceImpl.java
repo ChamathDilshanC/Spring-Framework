@@ -54,4 +54,22 @@ public class CustomerServiceImpl implements CustomerService {
             throw new RuntimeException("Customer Not Found");
         }
     }
+
+    @Override
+    public String generateNextCustomerId() {
+        Customer customer = customerRepo.findFirstByOrderByIdDesc();
+        if (customer == null) {
+            return "C001";
+        }
+        String lastNumber = customer.getId().substring(1);
+        int newNumber = Integer.parseInt(lastNumber) + 1;
+        if (newNumber < 10) {
+            return "C00" + newNumber;
+        } else if (newNumber < 100) {
+            return "C0" + newNumber;
+        } else {
+            return "C" + newNumber;
+        }
+    }
+
 }
