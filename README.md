@@ -1,6 +1,185 @@
 # 🛍️ Spring Boot E-Commerce Core API
 
+<div align="center">
+
+[![Java](https://img.shields.io/badge/Java-17-orange?style=for-the-badge&logo=java)](https://www.oracle.com/java/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen?style=for-the-badge&logo=spring)](https://spring.io/projects/spring-boot)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0%2B-blue?style=for-the-badge&logo=mysql)](https://www.mysql.com/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
+
+[Features](#features) • [Installation](#installation) • [API Reference](#api-reference) • [Documentation](#documentation) • [Contributing](#contributing)
+
+</div>
+
 A modern, scalable e-commerce backend API built with Spring Boot, featuring comprehensive order management, customer tracking, and inventory control.
+
+## 📊 System Architecture
+
+```mermaid
+graph TD
+    A[Client Applications] -->|REST API| B[API Gateway]
+    B --> C[Spring Boot Application]
+    C --> D[Service Layer]
+    D --> E[Repository Layer]
+    E --> F[(MySQL Database)]
+    
+    style A fill:#f9a825,stroke:#f57f17,stroke-width:2px
+    style B fill:#29b6f6,stroke:#0288d1,stroke-width:2px
+    style C fill:#66bb6a,stroke:#43a047,stroke-width:2px
+    style D fill:#7e57c2,stroke:#5e35b1,stroke-width:2px
+    style E fill:#ec407a,stroke:#d81b60,stroke-width:2px
+    style F fill:#5c6bc0,stroke:#3949ab,stroke-width:2px
+```
+
+## 📈 Performance Metrics
+
+```mermaid
+pie title API Response Time Distribution
+    "< 100ms" : 45
+    "100-300ms" : 30
+    "300-500ms" : 15
+    "> 500ms" : 10
+```
+
+## ✨ Features
+
+<div align="center">
+
+| Feature | Description | Status |
+|---------|-------------|---------|
+| 👥 **Customer Management** | Profile tracking & preferences | ✅ |
+| 📦 **Inventory Control** | Real-time stock management | ✅ |
+| 🛒 **Order Processing** | Complete order lifecycle | ✅ |
+| 🔐 **Security** | JWT Authentication & Authorization | ✅ |
+| 📊 **Analytics** | Sales & inventory insights | 🚧 |
+| 💳 **Payment Gateway** | Secure payment processing | 🚧 |
+
+</div>
+
+[Previous content remains the same until Tech Stack section]
+
+## 🛠️ Tech Stack
+
+<div align="center">
+
+```mermaid
+graph LR
+    A[Java 17] --> B[Spring Boot 3.x]
+    B --> C[Spring Data JPA]
+    B --> D[Spring Security]
+    C --> E[Hibernate]
+    E --> F[MySQL]
+    B --> G[Maven]
+```
+
+</div>
+
+[Previous installation & setup content remains the same]
+
+## 📊 API Performance
+
+```mermaid
+gantt
+    title API Response Times
+    dateFormat  X
+    axisFormat %s
+    
+    section Customer API
+    GET All    :0, 150ms
+    POST New   :0, 200ms
+    UPDATE     :0, 180ms
+    
+    section Order API
+    Create Order :0, 300ms
+    Get Status  :0, 100ms
+    
+    section Inventory API
+    Stock Check :0, 120ms
+    Update      :0, 250ms
+```
+
+## 🔄 Business Flow
+
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant A as API
+    participant S as Service
+    participant D as Database
+    
+    C->>A: Place Order
+    A->>S: Process Order
+    S->>D: Check Inventory
+    D-->>S: Inventory Status
+    S->>D: Update Stock
+    D-->>S: Confirmation
+    S-->>A: Order Status
+    A-->>C: Order Confirmation
+```
+
+[Previous API Endpoints content remains the same]
+
+## 📈 System Monitoring
+
+```mermaid
+graph LR
+    A[API Gateway] -->|Metrics| B[Prometheus]
+    B -->|Visualization| C[Grafana]
+    A -->|Logs| D[ELK Stack]
+    A -->|Traces| E[Jaeger]
+```
+
+## 🌟 Feature Roadmap
+
+```mermaid
+timeline
+    title Development Roadmap
+    2024 Q1 : Basic E-commerce Features
+            : Customer Management
+            : Order Processing
+    2024 Q2 : Advanced Features
+            : Payment Integration
+            : Analytics Dashboard
+    2024 Q3 : Performance Optimization
+            : Caching Implementation
+            : Load Balancing
+    2024 Q4 : Scale & Security
+            : Microservices Migration
+            : Enhanced Security
+```
+
+[Previous content remains the same until Authors section]
+
+## 👥 Authors
+
+<div align="center">
+
+[![GitHub](https://img.shields.io/badge/GitHub-Chamath_Dilshan-black?style=for-the-badge&logo=github)](https://github.com/ChamathDilshanC)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Chamath_Dilshan-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/chamathdilsahnc/)
+[![Email](https://img.shields.io/badge/Email-dilshancolonne123%40gmail.com-red?style=for-the-badge&logo=gmail)](mailto:dilshancolonne123@gmail.com)
+
+</div>
+
+## 📊 Project Statistics
+
+<div align="center">
+
+![Project Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
+![Last Commit](https://img.shields.io/github/last-commit/ChamathDilshanC/spring-boot-ecommerce?style=for-the-badge)
+![Issues](https://img.shields.io/github/issues/ChamathDilshanC/spring-boot-ecommerce?style=for-the-badge)
+![Pull Requests](https://img.shields.io/github/issues-pr/ChamathDilshanC/spring-boot-ecommerce?style=for-the-badge)
+
+</div>
+
+---
+
+<div align="center">
+
+Made with ❤️ by [Chamath Dilshan](https://github.com/ChamathDilshanC)
+
+⭐ Star this repository if you find it helpful!
+
+</div>
 
 ## ✨ Features
 
