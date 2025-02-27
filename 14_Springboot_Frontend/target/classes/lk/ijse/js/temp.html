@@ -1,0 +1,91 @@
+$(document).ready(function() {
+loadItems();
+initializeEventHandlers();
+});
+
+
+
+function loadItems() {
+$("#ItemDetailsSelect").prop('disabled', true);
+$("#ItemDetails").addClass('loading');
+
+$.ajax({
+method: "GET",
+url: "http://localhost:8080/api/v1/Item/getAll",
+success: function(response) {
+if (response.code === 200 && response.data && response.data.length > 0) {
+const Items = response.data;
+
+// Clear and initialize select
+$("#ItemDetailsSelect")
+.empty()
+.append('<option value="">Select a Item...</option>');
+
+// Add Item options
+Items.forEach(Item => {
+$("#ItemDetailsSelect").append(
+`<option value="${Item.id}">
+    ${Item.name} (ID: ${Item.id})
+</option>`
+);
+});
+
+// Store Items data for later use
+window.ItemsData = Items;
+
+} else {
+showError("No Items found");
+}
+},
+error: function(xhr, status, error) {
+showError("Failed to load Items");
+console.error("Error details:", {xhr, status, error});
+},
+complete: function() {
+// Remove loading state
+$("#ItemDetailsSelect").prop('disabled', false);
+$("#ItemDetails").removeClass('loading');
+}
+});
+}
+
+function initializeEventHandlers() {
+// Handle Item selection change
+$("#ItemDetailsSelect").on('change', function() {
+const selectedId = $(this).val();
+
+if (!selectedId) {
+clearItemDetails();
+return;
+}
+
+const selectedItem = window.ItemsData?.find(
+c => c.id.toString() === selectedId
+);
+
+if (selectedItem) {
+updateItemDetails(selectedItem);
+} else {
+showError("Item data not found");
+clearItemDetails();
+}
+});
+
+
+}
+
+function updateItemDetails(Item) {
+$("#ItemDetailsName").text(Item.name || 'N/A');
+$("#ItemDetailsAddress").text(Item.address || 'N/A');
+
+// Add animation for update
+$("#ItemDetails").addClass('updated');
+setTimeout(() => {
+$("#ItemDetails").removeClass('updated');
+}, 300);
+}
+
+function clearItemDetails() {
+$("#ItemDetailsName").text('Select a Item');
+$("#ItemDetailsAddress").text('Address will appear here');
+}

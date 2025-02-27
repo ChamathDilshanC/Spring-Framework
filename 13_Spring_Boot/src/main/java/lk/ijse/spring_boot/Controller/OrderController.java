@@ -16,13 +16,18 @@ public class OrderController {
     private OrderServiceImpl orderService;
 
     @PostMapping("/save")
-    public ResponseEntity<ResponseUtil> saveOrder(@RequestBody OrderDTO orderDTO) {
+    public ResponseUtil saveOrder(@RequestBody OrderDTO orderDTO) {
         if (orderDTO.getOrderId() == null || orderDTO.getCustomerId() == null ||
                 orderDTO.getOrderDetails() == null || orderDTO.getOrderDetails().isEmpty()) {
-            return new ResponseEntity<>(new ResponseUtil(400, "Invalid order details", null), HttpStatus.BAD_REQUEST);
+            return new ResponseUtil(400, "Invalid Order Details", null);
         }
 
         ResponseUtil response = orderService.saveOrder(orderDTO);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        return new ResponseUtil(response.getCode(), response.getMessage(), response.getData());
+    }
+
+    @GetMapping("/generateNextId")
+    public ResponseUtil generateNextId() {
+        return new ResponseUtil(201, "Order Id Generated", orderService.generateNextOrderId());
     }
 }

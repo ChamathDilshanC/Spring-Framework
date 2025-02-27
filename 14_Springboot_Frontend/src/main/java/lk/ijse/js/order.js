@@ -1,445 +1,486 @@
+let cartItems = [];
+
 $(document).ready(function() {
-    // Set default date to today
-    const today = new Date().toISOString().split('T')[0];
-    $('#orderDate').val(today);
+    initializeApp();
 
-    // Initialize order items array
-    let orderItems = [];
-    let customers = [];
-    let items = [];
+    if (!$('#toastContainer').length) {
+        $('body').append('<div id="toastContainer"></div>');
+    }
+});
 
-    // Load customers and items when page loads
+function initializeApp() {
+    generateNextOrderId();
+
     loadCustomers();
     loadItems();
-    updateOrderSummary();
 
-    // Event listeners
-    $('#customerSearch').on('focus', function() {
-        $('#customerDropdown').addClass('show');
-        filterCustomers();
-    });
+    initializeEventHandlers();
 
-    $('#itemSearch').on('focus', function() {
-        $('#itemDropdown').addClass('show');
-        filterItems();
-    });
+    updateCartTable();
+}
 
-    $('#customerSearch').on('input', filterCustomers);
-    $('#itemSearch').on('input', filterItems);
-    $('#placeOrderBtn').click(placeOrder);
-    $('#clearOrderBtn').click(clearOrder);
+function generateNextOrderId() {
+    $("#orderIdDisplay").html('<span class="spinner-border spinner-border-sm me-2"></span>Generating...');
 
-    // Load all customers from API
-    function loadCustomers() {
-        $.ajax({
-            method: "GET",
-            url: "http://localhost:8080/api/v1/customer/getAll",
-            success: function(data) {
-                customers = data;
-                renderCustomerDropdown();
-                console.log("Customers loaded:", customers.length);
-            },
-            error: function(xhr, status, error) {
-                showToast("Error", "Failed to load customers: " + error, "error");
-                console.error("Customer loading error:", xhr.responseText);
-            }
-        });
-    }
-
-    // Load all items from API
-    function loadItems() {
-        $.ajax({
-            method: "GET",
-            url: "http://localhost:8080/api/v1/item/getAll",
-            success: function(data) {
-                items = data;
-                renderItemDropdown();
-                console.log("Items loaded:", items.length);
-            },
-            error: function(xhr, status, error) {
-                showToast("Error", "Failed to load items: " + error, "error");
-                console.error("Item loading error:", xhr.responseText);
-            }
-        });
-    }
-
-    // Render customer dropdown options
-    function renderCustomerDropdown() {
-        const dropdown = $('#customerDropdown');
-        dropdown.empty();
-
-        if (customers.length === 0) {
-            dropdown.append('<div class="dropdown-item">No customers found</div>');
-            return;
-        }
-
-        customers.forEach(customer => {
-            const element = $(`<div class="dropdown-item" data-id="${customer.id}">
-                <div style="font-weight: 500;">${customer.id} - ${customer.name}</div>
-                <div style="font-size: 0.8rem; color: #64748b;">${customer.address || 'No address'}</div>
-            </div>`);
-
-            element.click(function() {
-                selectCustomer(customer);
-                dropdown.removeClass('show');
-            });
-
-            dropdown.append(element);
-        });
-    }
-
-    // Render item dropdown options
-    function renderItemDropdown() {
-        const dropdown = $('#itemDropdown');
-        dropdown.empty();
-
-        if (items.length === 0) {
-            dropdown.append('<div class="dropdown-item">No items found</div>');
-            return;
-        }
-
-        items.forEach(item => {
-            const element = $(`<div class="dropdown-item" data-id="${item.itemCode}">
-                <div style="font-weight: 500;">${item.itemCode} - ${item.name}</div>
-                <div style="font-size: 0.8rem; display: flex; justify-content: space-between; align-items: center;">
-                    <span style="color: #059669;">$${parseFloat(item.price).toFixed(2)}</span>
-                    <span style="color: #64748b;">Stock: ${item.qty}</span>
-                    <button class="add-to-cart-btn">
-                        <i class="fas fa-plus"></i> Add
-                    </button>
-                </div>
-            </div>`);
-
-            // Target just the add button to prevent dropdown item click issues
-            element.find('.add-to-cart-btn').click(function(e) {
-                e.stopPropagation(); // Prevent the dropdown item click event
-                addItemToOrder(item);
-                // Don't close dropdown to allow multiple additions
-            });
-
-            // Click on the item (not the button) selects it and closes dropdown
-            element.click(function(e) {
-                if (!$(e.target).hasClass('add-to-cart-btn') && !$(e.target).parent().hasClass('add-to-cart-btn')) {
-                    $('#itemSearch').val(`${item.itemCode} - ${item.name}`);
-                    dropdown.removeClass('show');
-                }
-            });
-
-            dropdown.append(element);
-        });
-    }
-
-    // Filter customers based on search input
-    function filterCustomers() {
-        const searchTerm = $('#customerSearch').val().toLowerCase();
-        let hasResults = false;
-
-        if (!$('#customerDropdown').hasClass('show')) {
-            $('#customerDropdown').addClass('show');
-        }
-
-        $('#customerDropdown .dropdown-item').each(function() {
-            const text = $(this).text().toLowerCase();
-            const matches = text.indexOf(searchTerm) > -1;
-            $(this).toggle(matches);
-            if (matches) hasResults = true;
-        });
-
-        // If no results, show a message
-        if (!hasResults) {
-            if ($('#customerDropdown .no-results').length === 0) {
-                $('#customerDropdown').append('<div class="no-results">No matching customers found</div>');
-            }
-        } else {
-            $('#customerDropdown .no-results').remove();
-        }
-    }
-
-    // Filter items based on search input
-    function filterItems() {
-        const searchTerm = $('#itemSearch').val().toLowerCase();
-        let hasResults = false;
-
-        if (!$('#itemDropdown').hasClass('show')) {
-            $('#itemDropdown').addClass('show');
-        }
-
-        $('#itemDropdown .dropdown-item').each(function() {
-            const text = $(this).text().toLowerCase();
-            const matches = text.indexOf(searchTerm) > -1;
-            $(this).toggle(matches);
-            if (matches) hasResults = true;
-        });
-
-        // If no results, show a message
-        if (!hasResults) {
-            if ($('#itemDropdown .no-results').length === 0) {
-                $('#itemDropdown').append('<div class="no-results">No matching items found</div>');
-            }
-        } else {
-            $('#itemDropdown .no-results').remove();
-        }
-    }
-
-    // Select a customer for the order
-    function selectCustomer(customer) {
-        $('#customerId').val(customer.id);
-        $('#customerSearch').val(`${customer.id} - ${customer.name}`);
-        $('#customerName').text(`${customer.name}`);
-        $('#customerAddress').text(`${customer.address || 'No address'}`);
-        $('#selectedCustomerInfo').show();
-    }
-
-    // Add an item to the order
-    function addItemToOrder(item) {
-        console.log("Adding item to order:", item);
-
-        // Check if the item is already in the order
-        const existingItemIndex = orderItems.findIndex(orderDetail =>
-            orderDetail.item && orderDetail.item.itemCode === item.itemCode);
-
-        if (existingItemIndex !== -1) {
-            // If item already exists, increment quantity if stock allows
-            const currentQty = orderItems[existingItemIndex].quantity;
-            if (currentQty < item.qty) {
-                orderItems[existingItemIndex].quantity += 1;
-                orderItems[existingItemIndex].total = orderItems[existingItemIndex].unitPrice *
-                    orderItems[existingItemIndex].quantity;
-                showToast("Success", `Increased quantity of ${item.name}`, "success");
+    $.ajax({
+        method: "GET",
+        url: "http://localhost:8080/api/v1/order/generateNextId",
+        success: function (response) {
+            if (response.code === 201 && response.data) {
+                $("#orderId").val(response.data);
+                $("#orderIdDisplay").text(response.data);
+                console.log("Next order ID:", response.data);
             } else {
-                showToast("Warning", "Cannot exceed available stock", "error");
+                showError("Failed to generate order ID");
+                $("#orderIdDisplay").text("Error");
+                console.error("Error response:", response);
+            }
+        },
+        error: function (xhr, status, error) {
+            showError("Failed to generate order ID");
+            $("#orderIdDisplay").text("Error");
+            console.error("Error details:", {xhr, status, error});
+        }
+    });
+}
+
+function loadCustomers() {
+    $("#customerDetailsSelect")
+        .prop('disabled', true)
+        .html('<option value="">Loading customers...</option>');
+
+    $.ajax({
+        method: "GET",
+        url: "http://localhost:8080/api/v1/customer/getAll",
+        success: function(response) {
+            if (response.code === 200 && response.data && response.data.length > 0) {
+                const customers = response.data;
+
+                $("#customerDetailsSelect")
+                    .empty()
+                    .append('<option value="">Select a customer...</option>');
+
+                customers.forEach(customer => {
+                    $("#customerDetailsSelect").append(
+                        `<option value="${customer.id}">${customer.name} (ID: ${customer.id})</option>`
+                    );
+                });
+
+                window.customersData = customers;
+            } else {
+                $("#customerDetailsSelect")
+                    .empty()
+                    .append('<option value="">No customers available</option>');
+
+                showError("No customers found in the system");
+            }
+        },
+        error: function(xhr, status, error) {
+            $("#customerDetailsSelect")
+                .empty()
+                .append('<option value="">Error loading customers</option>');
+
+            showError("Failed to load customers. Please check server connection.");
+            console.error("Error details:", {xhr, status, error});
+        },
+        complete: function() {
+            $("#customerDetailsSelect").prop('disabled', false);
+        }
+    });
+}
+
+function loadItems() {
+    $("#ItemDetailsSelect")
+        .prop('disabled', true)
+        .html('<option value="">Loading items...</option>');
+
+    $.ajax({
+        method: "GET",
+        url: "http://localhost:8080/api/v1/item/getAll",
+        success: function(response) {
+            if (response.code === 200 && response.data && response.data.length > 0) {
+                const items = response.data;
+
+                $("#ItemDetailsSelect")
+                    .empty()
+                    .append('<option value="">Select an item...</option>');
+
+                items.forEach(item => {
+                    $("#ItemDetailsSelect").append(
+                        `<option value="${item.itemCode}">${item.name} (Code: ${item.itemCode})</option>`
+                    );
+                });
+
+                window.itemsData = items;
+            } else {
+                $("#ItemDetailsSelect")
+                    .empty()
+                    .append('<option value="">No items available</option>');
+
+                showError("No items found in the system");
+            }
+        },
+        error: function(xhr, status, error) {
+            $("#ItemDetailsSelect")
+                .empty()
+                .append('<option value="">Error loading items</option>');
+
+            showError("Failed to load items. Please check server connection.");
+            console.error("Error details:", {xhr, status, error});
+        },
+        complete: function() {
+            $("#ItemDetailsSelect").prop('disabled', false);
+        }
+    });
+}
+
+function initializeEventHandlers() {
+    $("#customerDetailsSelect").on('change', function() {
+        const selectedId = $(this).val();
+
+        if (!selectedId) {
+            clearCustomerDetails();
+            return;
+        }
+
+        const selectedCustomer = window.customersData?.find(
+            c => c.id.toString() === selectedId
+        );
+
+        if (selectedCustomer) {
+            updateCustomerDetails(selectedCustomer);
+        } else {
+            showError("Customer data not found");
+            clearCustomerDetails();
+        }
+    });
+
+    $("#ItemDetailsSelect").on('change', function() {
+        const selectedCode = $(this).val();
+
+        if (!selectedCode) {
+            clearItemDetails();
+            return;
+        }
+
+        const selectedItem = window.itemsData?.find(
+            i => i.itemCode.toString() === selectedCode
+        );
+
+        if (selectedItem) {
+            updateItemDetails(selectedItem);
+        } else {
+            showError("Item data not found");
+            clearItemDetails();
+        }
+    });
+
+    $("#addToCartBtn").on('click', function() {
+        const selectedItemCode = $("#ItemDetailsSelect").val();
+        if (!selectedItemCode) {
+            showError("Please select an item first");
+            return;
+        }
+
+        const selectedItem = window.itemsData?.find(
+            i => i.itemCode.toString() === selectedItemCode
+        );
+
+        if (!selectedItem) {
+            showError("Selected item not found");
+            return;
+        }
+
+        const existingItem = cartItems.find(item => item.itemCode === selectedItem.itemCode);
+
+        if (existingItem) {
+            if (existingItem.quantity + 1 > selectedItem.qty) {
+                showError(`Not enough stock available for ${selectedItem.name}`);
                 return;
             }
+            existingItem.quantity += 1;
+            existingItem.total = existingItem.quantity * existingItem.unitPrice;
+            showSuccess(`Increased ${selectedItem.name} quantity to ${existingItem.quantity}`);
         } else {
-            // Add new item to order
-            orderItems.push({
-                item: item,
-                quantity: 1,
-                unitPrice: parseFloat(item.price),
-                total: parseFloat(item.price)
-            });
-            showToast("Success", `Added ${item.name} to order`, "success");
-        }
-
-        renderOrderItems();
-        updateOrderSummary();
-    }
-
-    // Render order items in the table
-    function renderOrderItems() {
-        const tableBody = $('#orderItemsTableBody');
-        tableBody.empty();
-
-        if (orderItems.length === 0) {
-            $('#orderItemsTable').hide();
-            $('#emptyOrderMessage').show();
-            return;
-        }
-
-        $('#orderItemsTable').show();
-        $('#emptyOrderMessage').hide();
-
-        orderItems.forEach((orderDetail, index) => {
-            const item = orderDetail.item;
-            const row = $(`<tr>
-                <td>
-                    <div style="font-weight: 500;">${item.name}</div>
-                    <div style="font-size: 0.75rem; color: #64748b;">${item.itemCode}</div>
-                </td>
-                <td>$${orderDetail.unitPrice.toFixed(2)}</td>
-                <td>
-                    <div class="quantity-control">
-                        <button type="button" class="quantity-btn decrease-btn">-</button>
-                        <input type="text" class="quantity-input form-control" value="${orderDetail.quantity}" readonly>
-                        <button type="button" class="quantity-btn increase-btn">+</button>
-                    </div>
-                </td>
-                <td>$${(orderDetail.unitPrice * orderDetail.quantity).toFixed(2)}</td>
-                <td class="action-cell">
-                    <button type="button" class="btn btn-sm btn-danger remove-item">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </td>
-            </tr>`);
-
-            // Decrease quantity button
-            row.find('.decrease-btn').click(function() {
-                if (orderDetail.quantity > 1) {
-                    orderDetail.quantity -= 1;
-                    orderDetail.total = orderDetail.unitPrice * orderDetail.quantity;
-                    renderOrderItems();
-                    updateOrderSummary();
-                }
-            });
-
-            // Increase quantity button
-            row.find('.increase-btn').click(function() {
-                // Check available stock
-                if (orderDetail.quantity < item.qty) {
-                    orderDetail.quantity += 1;
-                    orderDetail.total = orderDetail.unitPrice * orderDetail.quantity;
-                    renderOrderItems();
-                    updateOrderSummary();
-                } else {
-                    showToast("Warning", "Cannot exceed available stock", "error");
-                }
-            });
-
-            // Remove item button
-            row.find('.remove-item').click(function() {
-                orderItems.splice(index, 1);
-                renderOrderItems();
-                updateOrderSummary();
-                showToast("Success", `Removed ${item.name} from order`, "success");
-            });
-
-            tableBody.append(row);
-        });
-    }
-
-    // Update order summary calculations
-    function updateOrderSummary() {
-        const subtotal = orderItems.reduce((sum, item) => sum + (item.unitPrice * item.quantity), 0);
-        const totalItems = orderItems.reduce((sum, item) => sum + item.quantity, 0);
-
-        $('#subtotal').text('$' + subtotal.toFixed(2));
-        $('#totalItems').text(totalItems);
-        $('#totalAmount').text('$' + subtotal.toFixed(2));
-
-        // Enable/disable place order button based on if we have items and a customer
-        const hasCustomer = $('#customerId').val() !== '';
-        const hasItems = orderItems.length > 0;
-        $('#placeOrderBtn').prop('disabled', !(hasCustomer && hasItems));
-    }
-
-    // Place the order
-    function placeOrder() {
-        const orderId = $('#orderId').val();
-        const customerId = $('#customerId').val();
-        const orderDateStr = $('#orderDate').val();
-
-        // Validation
-        if (!orderId) {
-            showToast("Error", "Order ID is required", "error");
-            return;
-        }
-
-        if (!customerId) {
-            showToast("Error", "Please select a customer", "error");
-            return;
-        }
-
-        if (orderItems.length === 0) {
-            showToast("Error", "Please add at least one item to the order", "error");
-            return;
-        }
-
-        // Calculate total
-        const total = orderItems.reduce((sum, item) => sum + (item.unitPrice * item.quantity), 0);
-
-        // Format datetime for backend (ISO format)
-        const orderDate = new Date(orderDateStr);
-        const formattedDate = orderDate.toISOString();
-
-        // Prepare order details according to entity structure
-        const orderDetails = orderItems.map(orderDetail => ({
-            item: {
-                itemCode: orderDetail.item.itemCode
-            },
-            quantity: orderDetail.quantity,
-            unitPrice: orderDetail.unitPrice
-        }));
-
-        // Create order object matching the server-side entity structure
-        const order = {
-            orderId: orderId,
-            orderDate: formattedDate,
-            customer: {
-                id: customerId
-            },
-            orderDetails: orderDetails,
-            total: total
-        };
-
-        console.log("Sending order:", JSON.stringify(order));
-
-        // Send order to API
-        $.ajax({
-            method: "POST",
-            url: "http://localhost:8080/api/v1/order/save",
-            contentType: "application/json",
-            data: JSON.stringify(order),
-            success: function(response) {
-                console.log("Order response:", response);
-                if (response.code === 201) {
-                    showToast("Success", "Order placed successfully", "success");
-                    clearOrder();
-                } else {
-                    showToast("Error", response.message || "Failed to place order", "error");
-                }
-            },
-            error: function(xhr, status, error) {
-                let errorMessage = "Failed to place order";
-                try {
-                    const response = JSON.parse(xhr.responseText);
-                    errorMessage = response.message || errorMessage;
-                } catch (e) {
-                    // Use default error message
-                }
-                showToast("Error", errorMessage, "error");
-                console.error("Order error:", xhr.responseText);
+            if (selectedItem.qty < 1) {
+                showError(`${selectedItem.name} is out of stock`);
+                return;
             }
-        });
-    }
+            cartItems.push({
+                itemCode: selectedItem.itemCode,
+                name: selectedItem.name,
+                quantity: 1,
+                unitPrice: selectedItem.price,
+                total: selectedItem.price
+            });
+            showSuccess(`Added ${selectedItem.name} to cart`);
+        }
 
-    // Clear the current order
-    function clearOrder() {
-        $('#orderForm')[0].reset();
-        $('#orderDate').val(today);
-        $('#customerId').val('');
-        $('#selectedCustomerInfo').hide();
-        orderItems = [];
-        renderOrderItems();
-        updateOrderSummary();
-    }
+        updateCartTable();
+        updateTotalAmount();
+    });
 
-    // Show toast notification
-    function showToast(title, message, type = "success") {
-        const toast = $(`<div class="toast ${type}">
-            <div class="toast-icon">
-                <i class="fas ${type === 'success' ? 'fa-check' : 'fa-exclamation-triangle'}"></i>
-            </div>
-            <div class="toast-content">
-                <div class="toast-title">${title}</div>
-                <div class="toast-message">${message}</div>
-            </div>
-            <button class="toast-close">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>`);
-
-        // Add close functionality
-        toast.find('.toast-close').click(function() {
-            toast.removeClass('show');
-            setTimeout(() => toast.remove(), 300);
-        });
-
-        $('#toastContainer').append(toast);
-
-        // Show toast with animation
-        setTimeout(() => toast.addClass('show'), 10);
-
-        // Auto-remove after 4 seconds
-        setTimeout(() => {
-            toast.removeClass('show');
-            setTimeout(() => toast.remove(), 300);
-        }, 4000);
-    }
-
-    // Close dropdowns when clicking outside
-    $(document).click(function(e) {
-        if (!$(e.target).closest('.search-dropdown, .dropdown-menu').length) {
-            $('.dropdown-menu').removeClass('show');
+    $("#placeOrderButton").on('click', function() {
+        if (validateOrder()) {
+            $(this).html('<span class="spinner-border spinner-border-sm me-2"></span>Processing...').prop('disabled', true);
+            placeOrder();
         }
     });
-});
+}
+
+function validateOrder() {
+    const selectedCustomerId = $("#customerDetailsSelect").val();
+    if (!selectedCustomerId) {
+        showError("Please select a customer");
+        return false;
+    }
+
+    if (cartItems.length === 0) {
+        showError("Cart is empty. Please add items to cart");
+        return false;
+    }
+
+    const orderId = $("#orderId").val();
+    if (!orderId) {
+        showError("Invalid order ID");
+        return false;
+    }
+
+    return true;
+}
+
+function updateCustomerDetails(customer) {
+    $("#customerDetailsName").text(customer.name || 'N/A');
+    $("#customerDetailsAddress").text(customer.address || 'N/A');
+}
+
+function clearCustomerDetails() {
+    $("#customerDetailsName").text('Select a customer');
+    $("#customerDetailsAddress").text('Address will appear here');
+}
+
+function updateItemDetails(item) {
+    $("#ItemDetailsName").text(item.name || 'N/A');
+    $("#ItemDetailsPrice").text(`$${item.price.toFixed(2)}` || 'N/A');
+
+    const stockLevel = item.qty || 0;
+    let stockBadge = '';
+
+    if (stockLevel > 10) {
+        stockBadge = `<span class="badge bg-success-subtle text-success">${stockLevel} in stock</span>`;
+    } else if (stockLevel > 0) {
+        stockBadge = `<span class="badge bg-warning-subtle text-warning">Low stock: ${stockLevel}</span>`;
+    } else {
+        stockBadge = `<span class="badge bg-danger-subtle text-danger">Out of stock</span>`;
+    }
+
+    $("#ItemDetailsStock").html(stockBadge);
+}
+
+function clearItemDetails() {
+    $("#ItemDetailsName").text('Select an item');
+    $("#ItemDetailsPrice").text('Price will appear here');
+    $("#ItemDetailsStock").text('Stock will appear here');
+}
+
+function updateCartTable() {
+    const tbody = $("#cartTableBody");
+    tbody.empty();
+
+    if (cartItems.length === 0) {
+        tbody.html(`
+            <tr>
+                <td colspan="6">
+                    <div class="empty-cart">
+                        <i class="bi bi-cart"></i>
+                        <p>Your cart is empty</p>
+                        <span class="text-muted">Select items to add to your order</span>
+                    </div>
+                </td>
+            </tr>
+        `);
+        return;
+    }
+
+    cartItems.forEach((item, index) => {
+        tbody.append(`
+            <tr>
+                <td>
+                    <span class="badge bg-primary-subtle text-primary">${item.itemCode}</span>
+                </td>
+                <td>
+                    <span class="fw-medium">${item.name}</span>
+                </td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-sm btn-light me-2" onclick="updateQuantity('${item.itemCode}', -1)">
+                            <i class="bi bi-dash"></i>
+                        </button>
+                        <span class="fw-medium">${item.quantity}</span>
+                        <button class="btn btn-sm btn-light ms-2" onclick="updateQuantity('${item.itemCode}', 1)">
+                            <i class="bi bi-plus"></i>
+                        </button>
+                    </div>
+                </td>
+                <td>$${item.unitPrice.toFixed(2)}</td>
+                <td>
+                    <span class="fw-semibold">$${item.total.toFixed(2)}</span>
+                </td>
+                <td>
+                    <button class="remove-btn" onclick="removeFromCart('${item.itemCode}')">
+                        <i class="bi bi-trash me-1"></i>
+                        Remove
+                    </button>
+                </td>
+            </tr>
+        `);
+    });
+}
+
+function removeFromCart(itemCode) {
+    const itemToRemove = cartItems.find(item => item.itemCode === itemCode);
+    if (itemToRemove) {
+        cartItems = cartItems.filter(item => item.itemCode !== itemCode);
+        updateCartTable();
+        updateTotalAmount();
+        showSuccess(`Removed ${itemToRemove.name} from cart`);
+    }
+}
+
+function updateQuantity(itemCode, change) {
+    const selectedItem = cartItems.find(item => item.itemCode === itemCode);
+    if (!selectedItem) return;
+
+    const inventoryItem = window.itemsData?.find(i => i.itemCode.toString() === itemCode);
+    if (!inventoryItem) return;
+
+    const newQuantity = selectedItem.quantity + change;
+
+    if (newQuantity < 1) {
+        return;
+    }
+
+    if (change > 0 && newQuantity > inventoryItem.qty) {
+        showError(`Not enough stock available for ${selectedItem.name}`);
+        return;
+    }
+
+    selectedItem.quantity = newQuantity;
+    selectedItem.total = selectedItem.quantity * selectedItem.unitPrice;
+
+    updateCartTable();
+    updateTotalAmount();
+}
+
+function updateTotalAmount() {
+    const total = cartItems.reduce((sum, item) => sum + item.total, 0);
+    $("#totalAmount").text(`Total: $${total.toFixed(2)}`);
+
+    $("#placeOrderButton").prop('disabled', cartItems.length === 0);
+}
+
+function showToast(message, type = 'success') {
+    const toast = $('<div>').addClass('toast').addClass(type);
+
+    const iconClass = type === 'success' ? 'bi-check-circle' : 'bi-exclamation-triangle';
+    const toastIcon = $('<i>').addClass(`bi ${iconClass} me-2`);
+
+    const toastContent = $('<div>').addClass('toast-content');
+    const toastTitle = $('<div>').addClass('fw-semibold mb-1').text(
+        type === 'success' ? 'Success' : 'Error'
+    );
+    const toastMessage = $('<div>').addClass('text-secondary small').text(message);
+    toastContent.append(toastTitle, toastMessage);
+
+    const closeBtn = $('<button>')
+        .addClass('toast-close')
+        .html('<i class="bi bi-x"></i>')
+        .click(function() {
+            toast.removeClass('show');
+            setTimeout(function() {
+                toast.remove();
+            }, 300);
+        });
+
+    toast.append(toastIcon, toastContent, closeBtn);
+    $('#toastContainer').append(toast);
+
+    setTimeout(function() {
+        toast.addClass('show');
+    }, 10);
+
+    setTimeout(function() {
+        toast.removeClass('show');
+        setTimeout(function() {
+            toast.remove();
+        }, 300);
+    }, 5000);
+}
+
+function showSuccess(message) {
+    showToast(message, 'success');
+}
+
+function showError(message) {
+    showToast(message, 'error');
+}
+
+function placeOrder() {
+    const selectedCustomerId = $("#customerDetailsSelect").val();
+    const orderId = $("#orderId").val();
+    const total = cartItems.reduce((sum, item) => sum + item.total, 0);
+
+    const orderDetails = cartItems.map(item => ({
+        itemCode: item.itemCode,
+        quantity: item.quantity,
+        unitPrice: item.unitPrice
+    }));
+
+    const order = {
+        orderId: orderId,
+        customerId: selectedCustomerId,
+        orderDetails: orderDetails,
+        total: total
+    };
+
+    console.log("Sending order to backend:", JSON.stringify(order, null, 2));
+
+    $.ajax({
+        method: "POST",
+        url: "http://localhost:8080/api/v1/order/save",
+        contentType: "application/json",
+        data: JSON.stringify(order),
+        success: function(response) {
+            console.log("Order response:", response);
+            if (response.code === 201) {
+
+                cartItems = [];
+                updateCartTable();
+                updateTotalAmount();
+                clearCustomerDetails();
+                showSuccess("Your Order "+ orderId + " placed successfully");
+                clearItemDetails();
+                $("#customerDetailsSelect").val("");
+                $("#ItemDetailsSelect").val("");
+
+                generateNextOrderId();
+            } else {
+                showError("Failed to place order: " + (response.message || "Unknown error"));
+                console.error("Order save failed:", response);
+            }
+        },
+        error: function(xhr, status, error) {
+            showError("Failed to place order");
+            console.error("Error details:", {
+                status: xhr.status,
+                statusText: xhr.statusText,
+                responseText: xhr.responseText
+            });
+        },
+        complete: function() {
+            $("#placeOrderButton")
+                .html('<i class="bi bi-check-circle"></i> Place Order')
+                .prop('disabled', false);
+        }
+    });
+}
