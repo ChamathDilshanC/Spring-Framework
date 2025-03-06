@@ -5,28 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dbb0351e-14d4-4809-8606-5b3d6c6226e1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/14_Springboot_Frontend/src/main/java/lk/ijse/js/dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/AppInitializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/AppInitializer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/bean/Boy.class" beforeDir="false" afterPath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/bean/Boy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/bean/Girl1.class" beforeDir="false" afterPath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/bean/Girl1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/bean/Girl2.class" beforeDir="false" afterPath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/bean/Girl2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/bean/SpringBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/bean/SpringBean.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/config/AppConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/config/AppConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/di/Boy.class" beforeDir="false" afterPath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/di/Boy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/di/Girl.class" beforeDir="false" afterPath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/di/Girl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/10_BackEnd/10_BackEnd.iml" beforeDir="false" afterPath="$PROJECT_DIR$/10_BackEnd/10_BackEnd.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/13_Spring_Boot/src/main/java/lk/ijse/spring_boot/Controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/13_Spring_Boot/src/main/java/lk/ijse/spring_boot/Controller/CustomerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/13_Spring_Boot/src/main/java/lk/ijse/spring_boot/Repo/CustomerRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/13_Spring_Boot/src/main/java/lk/ijse/spring_boot/Repo/CustomerRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/13_Spring_Boot/src/main/java/lk/ijse/spring_boot/service/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/13_Spring_Boot/src/main/java/lk/ijse/spring_boot/service/CustomerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/13_Spring_Boot/src/main/java/lk/ijse/spring_boot/service/Impl/CustomerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/13_Spring_Boot/src/main/java/lk/ijse/spring_boot/service/Impl/CustomerServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/14_Springboot_Frontend/src/main/java/lk/ijse/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/14_Springboot_Frontend/src/main/java/lk/ijse/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/14_Springboot_Frontend/target/classes/lk/ijse/Item.html" beforeDir="false" afterPath="$PROJECT_DIR$/14_Springboot_Frontend/target/classes/lk/ijse/Item.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/14_Springboot_Frontend/target/classes/lk/ijse/customer.html" beforeDir="false" afterPath="$PROJECT_DIR$/14_Springboot_Frontend/target/classes/lk/ijse/customer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/14_Springboot_Frontend/target/classes/lk/ijse/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/14_Springboot_Frontend/target/classes/lk/ijse/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/14_Springboot_Frontend/target/classes/lk/ijse/js/item.js" beforeDir="false" afterPath="$PROJECT_DIR$/14_Springboot_Frontend/target/classes/lk/ijse/js/item.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/14_Springboot_Frontend/target/classes/lk/ijse/js/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/14_Springboot_Frontend/target/classes/lk/ijse/js/order.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/14_Springboot_Frontend/target/classes/lk/ijse/js/temp.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/14_Springboot_Frontend/target/classes/lk/ijse/order.html" beforeDir="false" afterPath="$PROJECT_DIR$/14_Springboot_Frontend/target/classes/lk/ijse/order.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Z16_Frontend/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Z16_Frontend/src/main/java/lk/ijse/JQuery/jquery-3.7.1.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Z16_Frontend/src/main/java/lk/ijse/Js/login.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Z16_Frontend/src/main/java/lk/ijse/Js/register.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Z16_Frontend/src/main/java/lk/ijse/css/tost.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Z16_Frontend/src/main/java/lk/ijse/dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Z16_Frontend/src/main/java/lk/ijse/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Z16_Frontend/src/main/java/lk/ijse/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Z15_Spring_Sequrity/Z15_Spring_Sequrity.iml" beforeDir="false" afterPath="$PROJECT_DIR$/out/Z15_Spring_Sequrity/Z15_Spring_Sequrity.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springwithjwt/.idea/workspace.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +29,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="HTML File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -67,8 +61,14 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
     "JavaScript Debug.customer.html.executor": "Run",
     "JavaScript Debug.dashboard.html.executor": "Run",
+    "JavaScript Debug.index.html.executor": "Run",
+    "JavaScript Debug.login.html.executor": "Run",
+    "JavaScript Debug.register.html.executor": "Run",
+    "Node.js.login.js.executor": "Run",
+    "Node.js.register.js.executor": "Run",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
@@ -76,11 +76,15 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.Application.executor": "Run",
     "Spring Boot.SpringSecurityApplicationWork.executor": "Run",
+    "Spring Boot.SpringwithjwtApplication.executor": "Run",
     "Spring Boot.Z15SpringSequrityApplication.executor": "Run",
+    "deletionFromPopupRequiresConfirmation": "false",
     "git-widget-placeholder": "main",
-    "jdk.selected.JAVA_MODULE": "openjdk-21",
+    "jdk.selected.JAVA_MODULE": "21",
+    "js.last.introduce.type": "CONST",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/dilsh/Desktop/GitHubProjects",
+    "last_opened_file_path": "C:/Users/dilsh/Desktop/Spring-Framework/Z16_Frontend/src/main/java/lk/ijse/JQuery",
+    "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -95,7 +99,12 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\dilsh\Desktop\Spring-Framework\Z16_Frontend\src\main\java\lk\ijse\JQuery" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\dilsh\Desktop\Spring-Framework\Z16_Frontend\src\main\java\lk\ijse\css" />
+      <recent name="C:\Users\dilsh\Desktop\Spring-Framework\out" />
       <recent name="C:\Users\dilsh\Desktop\Spring-Framework" />
     </key>
   </component>
@@ -106,23 +115,25 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.SpringSecurityApplicationWork">
-    <configuration name="customer.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Spring-Framework/14_Springboot_Frontend/src/main/java/lk/ijse/customer.html" useBuiltInWebServerPort="true">
+  <component name="RunManager" selected="JavaScript Debug.register.html">
+    <configuration name="dashboard.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Spring-Framework/Z16_Frontend/src/main/java/lk/ijse/dashboard.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
-    <configuration name="dashboard.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Spring-Framework/14_Springboot_Frontend/src/main/java/lk/ijse/dashboard.html" useBuiltInWebServerPort="true">
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Spring-Framework/Z16_Frontend/src/main/java/lk/ijse/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="register.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Spring-Framework/Z16_Frontend/src/main/java/lk/ijse/register.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="login.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/Z16_Frontend/src/main/java/lk/ijse/Js/login.js" working-dir="$PROJECT_DIR$/Z16_Frontend/src/main/java/lk/ijse/Js">
+      <method v="2" />
+    </configuration>
+    <configuration name="register.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/Z16_Frontend/src/main/java/lk/ijse/Js/register.js" working-dir="$PROJECT_DIR$/Z16_Frontend/src/main/java/lk/ijse/Js">
       <method v="2" />
     </configuration>
     <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="Spring_Boot" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="lk.ijse.spring_boot.Application" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SpringSecurityApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="Spring_Security" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="lk.ijse.spring_security.SpringSecurityApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -134,15 +145,36 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SpringSecurityApplicationWork" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="Spring_Security" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="lk.ijse.spring_security.SpringSecurityApplicationWork" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SpringwithjwtApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="springwithjwt" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.springwithjwt.SpringwithjwtApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
-      <item itemvalue="JavaScript Debug.customer.html" />
+      <item itemvalue="JavaScript Debug.index.html" />
+      <item itemvalue="JavaScript Debug.register.html" />
       <item itemvalue="JavaScript Debug.dashboard.html" />
+      <item itemvalue="Node.js.login.js" />
+      <item itemvalue="Node.js.register.js" />
+      <item itemvalue="Spring Boot.SpringwithjwtApplication" />
       <item itemvalue="Spring Boot.Application" />
       <item itemvalue="Spring Boot.SpringSecurityApplicationWork" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JavaScript Debug.customer.html" />
+        <item itemvalue="JavaScript Debug.register.html" />
+        <item itemvalue="Node.js.register.js" />
+        <item itemvalue="JavaScript Debug.index.html" />
+        <item itemvalue="Node.js.login.js" />
         <item itemvalue="JavaScript Debug.dashboard.html" />
       </list>
     </recent_temporary>

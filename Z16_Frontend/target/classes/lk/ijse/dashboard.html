@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigiPay -Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #f0f4ff;
+        }
+        .hero-gradient {
+            background: linear-gradient(to right, #f0f4ff, #f8faff);
+        }
+        .card-shadow {
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.1), 0 8px 10px -5px rgba(59, 130, 246, 0.05);
+        }
+        .feature-icon {
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1), 0 2px 4px -1px rgba(59, 130, 246, 0.06);
+        }
+    </style>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="w-full py-4 px-6 lg:px-16 flex justify-between items-center">
+    <div class="flex space-x-8 items-center">
+        <div class="text-2xl font-bold text-blue-600">
+            <span class="text-blue-800">digi</span>pay
+        </div>
+        <div class="hidden md:flex space-x-6">
+            <a href="#" class="text-gray-600 hover:text-blue-600">Services</a>
+            <a href="#" class="text-gray-600 hover:text-blue-600">Credit</a>
+            <a href="#" class="text-gray-600 hover:text-blue-600">API</a>
+            <a href="#" class="text-gray-600 hover:text-blue-600">Payment</a>
+        </div>
+    </div>
+    <div class="flex items-center space-x-4">
+        <a href="#" class="hidden md:block text-gray-600 hover:text-blue-600">Help</a>
+        <a href="#" class="hidden md:block text-gray-600 hover:text-blue-600">Reports</a>
+        <a href="#" class="px-4 py-2 border border-blue-600 text-blue-600 rounded-md hover:bg-blue-50 transition duration-200">Download</a>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero-gradient py-12 px-6 lg:px-16">
+    <div class="text-center mb-6">
+        <p class="text-gray-600 mb-1">Simplify The Process</p>
+        <p class="text-gray-600">Of Purchasing Or Renewing Subscription</p>
+    </div>
+
+    <div class="flex justify-center mb-8">
+        <h1 class="text-3xl md:text-4xl font-bold">
+            <span class="text-blue-600">Subscription</span>
+            <span class="bg-blue-600 text-white px-2 py-1 rounded-[15px]">Payment</span>
+            <span class="text-blue-600">Portal</span>
+        </h1>
+    </div>
+
+    <!-- Credit Card and Subscription Graphics -->
+    <div class="relative flex justify-center items-center h-64 mb-16">
+        <!-- Credit Card -->
+        <div class="absolute transform -rotate-12 translate-x-[-40px] translate-y-[20px] z-10">
+            <div class="w-60 h-36 bg-gray-300 rounded-xl card-shadow flex flex-col justify-between p-4">
+                <div class="flex justify-between">
+                    <div class="w-10 h-6 bg-gray-400 rounded"></div>
+                    <div class="text-xs text-gray-600">Credit</div>
+                </div>
+                <div class="text-gray-600 text-sm tracking-widest">**** **** **** 1234</div>
+            </div>
+        </div>
+
+        <!-- Subscription Box -->
+        <div class="absolute z-20 transform translate-x-[40px] translate-y-[-10px]">
+            <div class="w-48 h-48 bg-blue-500 rounded-xl card-shadow flex items-center justify-center">
+                <div class="w-40 h-40 bg-blue-200 rounded-xl flex flex-col items-center justify-center">
+                    <div class="w-12 h-12 bg-white rounded-lg mb-2 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-xs text-blue-800 font-medium">Automatic Renewal</p>
+                        <p class="text-[10px] text-blue-700">Smart System</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-8 px-6 lg:px-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Feature 1 -->
+        <div class="bg-white p-6 rounded-xl card-shadow">
+            <div class="flex items-center mb-4">
+                <div class="w-10 h-10 bg-blue-100 rounded-lg feature-icon flex items-center justify-center mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                </div>
+                <h3 class="font-bold text-lg">High Flexibility</h3>
+            </div>
+            <p class="text-sm text-gray-600 mb-1">Complete Flexibility In Defining The Length Of The Entire Contract Period And Payment</p>
+            <p class="text-sm text-gray-600">Terms.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="bg-white p-6 rounded-xl card-shadow">
+            <div class="flex items-center mb-4">
+                <div class="w-10 h-10 bg-blue-100 rounded-lg feature-icon flex items-center justify-center mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                </div>
+                <h3 class="font-bold text-lg">Cancel The Contract</h3>
+            </div>
+            <p class="text-sm text-gray-600 mb-1">The Possibility Of Unilateral Or Bilateral Cancellation Of The Contract</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="bg-white p-6 rounded-xl card-shadow">
+            <div class="flex items-center mb-4">
+                <div class="w-10 h-10 bg-blue-100 rounded-lg feature-icon flex items-center justify-center mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                </div>
+                <h3 class="font-bold text-lg">Access To Report Panel</h3>
+            </div>
+            <p class="text-sm text-gray-600 mb-1">Various Highly Services And Reporting Panels For Businesses</p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="bg-white p-6 rounded-xl card-shadow">
+            <div class="flex items-center mb-4">
+                <div class="w-10 h-10 bg-blue-100 rounded-lg feature-icon flex items-center justify-center mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h3 class="font-bold text-lg">Free For Test</h3>
+            </div>
+            <p class="text-sm text-gray-600 mb-1">Free Demo And Free Use For 2 Months Without Any Conditions</p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="bg-white p-6 rounded-xl card-shadow">
+            <div class="flex items-center mb-4">
+                <div class="w-10 h-10 bg-blue-100 rounded-lg feature-icon flex items-center justify-center mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                </div>
+                <h3 class="font-bold text-lg">Trial</h3>
+            </div>
+            <p class="text-sm text-gray-600 mb-1">Possibility Of Setting A Trial Period For The Contract</p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="bg-white p-6 rounded-xl card-shadow">
+            <div class="flex items-center mb-4">
+                <div class="w-10 h-10 bg-blue-100 rounded-lg feature-icon flex items-center justify-center mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                </div>
+                <h3 class="font-bold text-lg">Facilitate Similar Contracts</h3>
+            </div>
+            <p class="text-sm text-gray-600 mb-1">The Possibility Of Having Similar Contracts To Deploy Very Rapid To The Project</p>
+        </div>
+    </div>
+</section>
+</body>
+</html>
