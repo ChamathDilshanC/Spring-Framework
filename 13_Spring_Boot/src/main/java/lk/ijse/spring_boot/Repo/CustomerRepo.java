@@ -18,5 +18,9 @@ public interface CustomerRepo extends JpaRepository<Customer, String> {
     @Query(value = "SELECT * FROM Customer", nativeQuery = true)
     void getAllCustomers();*//*
     boolean searchById(String id);*/
+
+    // get Customer Count
+    @Query(value = "SELECT COUNT(id) FROM Customer", nativeQuery = true)
+    Integer getCustomerCount();
     
 }

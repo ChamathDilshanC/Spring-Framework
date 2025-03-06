@@ -85,7 +85,8 @@ function loadItems() {
                         </tr>`
                     );
                 });
-                updateTotalItems();
+                updateTotalItems()
+                $("#emptyTable").hide();
             }
         },
         error: function(xhr, status, error) {

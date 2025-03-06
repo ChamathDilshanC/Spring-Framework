@@ -1,205 +1,166 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Order Management</title>
+  <title>Order Management System</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #6366f1;
-      --primary-dark: #4f46e5;
-      --secondary: #0ea5e9;
-    }
-    body {
-      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-      min-height: 100vh;
-      padding: 2rem;
-    }
-    .glass-card {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .glass-card:hover {
-      transform: translateY(-2px);
-    }
-    .gradient-text {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .border-gradient {
-      border-left: 4px solid;
-      border-image: linear-gradient(to bottom, var(--primary), var(--secondary)) 1;
-    }
-    .form-select {
-      border: 2px solid rgba(0,0,0,0.1);
-      border-radius: 1rem;
-      padding: 1rem;
-    }
-    .form-select:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 0.25rem rgba(99, 102, 241, 0.1);
-    }
-    .details-container {
-      background: rgba(99, 102, 241, 0.05);
-      border: 1px solid rgba(99, 102, 241, 0.1);
-      border-radius: 1rem;
-      padding: 1.5rem;
-    }
-    .custom-btn {
-      border-radius: 1rem;
-      padding: 0.75rem 2rem;
-      transition: all 0.3s ease;
-    }
-    .custom-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-    }
-    .table {
-      border-radius: 1rem;
-      overflow: hidden;
-    }
-    .remove-btn {
-      color: #ef4444;
-      background: none;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
-      transition: all 0.2s ease;
-    }
-    .remove-btn:hover {
-      background: rgba(239, 68, 68, 0.1);
-    }
-    #toastContainer {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1000;
-    }
-    .toast {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      margin-bottom: 10px;
-      padding: 16px;
-      display: flex;
-      align-items: center;
-      min-width: 300px;
-      transform: translateX(120%);
-      transition: transform 0.3s ease;
-    }
-    .toast.show {
-      transform: translateX(0);
-    }
-    .toast.success {
-      border-left: 4px solid #22c55e;
-    }
-    .toast.error {
-      border-left: 4px solid #ef4444;
-    }
-    @media (max-width: 768px) {
-      body {
-        padding: 1rem;
-      }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/order.css">
+  <script src="componnent/components.js"></script>
+
 </head>
 <body>
-<div class="container py-4">
-  <h1 class="display-4 text-center gradient-text fw-bold mb-5">Place Order</h1>
 
-  <div class="text-end mb-4">
-    <a href="dashboard.html" class="btn btn-danger custom-btn">
-      <i class="bi bi-house-door me-2"></i>Dashboard
-    </a>
-  </div>
+<!--Navigation Component-->
+<div id="nav-placeholder"></div>
 
-  <!-- Order ID label -->
-    <div class="mb-4">
-        <label for="orderId" class="form-label">Order ID</label>
-        <input type="text" class="form-control" id="orderId">
-    </div>
-
-
-  <div class="card glass-card shadow-lg border-0 rounded-4 mb-4">
-    <div class="card-body p-4">
-      <h5 class="card-title mb-4 text-primary d-flex align-items-center">
-        <div class="border-gradient me-2" style="height: 24px;"></div>Customer Information
-      </h5>
-      <div class="row g-4">
-        <div class="col-md-6">
-          <select class="form-select form-select-lg" id="customerDetailsSelect"></select>
-        </div>
-        <div class="col-md-6">
-          <div class="details-container">
-            <h6 class="text-primary mb-3">Customer Details</h6>
-            <p class="mb-2">Name: <span id="customerDetailsName"></span></p>
-            <p class="mb-0">Address: <span id="customerDetailsAddress"></span></p>
-          </div>
+<div class="app-container">
+  <div class="page-header">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <h1 class="gradient-text mb-0">Create New Order</h1>
+        <p class="text-muted mt-2">Add items, select a customer, and submit your order</p>
+      </div>
+      <div class="col-lg-6">
+        <div class="order-id-container ms-auto" style="max-width: 300px">
+          <span class="order-id-label">Order ID</span>
+          <div class="order-id-value" id="orderIdDisplay">Loading...</div>
+          <input type="hidden" id="orderId">
         </div>
       </div>
     </div>
   </div>
 
-  <div class="card glass-card shadow-lg border-0 rounded-4 mb-4">
-    <div class="card-body p-4">
-      <h5 class="card-title mb-4 text-primary d-flex align-items-center">
-        <div class="border-gradient me-2" style="height: 24px;"></div>Item Information
-      </h5>
-      <div class="row g-4">
-        <div class="col-md-6">
-          <select class="form-select form-select-lg" id="ItemDetailsSelect"></select>
+  <div class="row g-4">
+    <!-- Customer Selection Card -->
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <i class="bi bi-person-circle"></i> Customer Information
+          </h5>
         </div>
-        <div class="col-md-6">
-          <div class="details-container">
-            <h6 class="text-primary mb-3">Item Details</h6>
-            <div class="mb-3 pb-2 border-bottom">
-              <div class="d-flex justify-content-between">
-                <span class="text-muted">Name:</span>
-                <span class="fw-medium" id="ItemDetailsName"></span>
-              </div>
+        <div class="card-body">
+          <div class="row g-4">
+            <div class="col-md-6 position-relative">
+              <label for="customerDetailsSelect" class="form-label">Select Customer</label>
+              <select class="form-select form-select-lg" id="customerDetailsSelect">
+                <option value="">Loading customers...</option>
+              </select>
             </div>
-            <div class="mb-3 pb-2 border-bottom">
-              <div class="d-flex justify-content-between">
-                <span class="text-muted">Price:</span>
-                <span class="fw-medium" id="ItemDetailsPrice"></span>
-              </div>
-            </div>
-            <div class="mb-3">
-              <div class="d-flex justify-content-between">
-                <span class="text-muted">Stock:</span>
-                <span class="fw-medium" id="ItemDetailsStock"></span>
+            <div class="col-md-6">
+              <div class="details-panel h-100">
+                <h6><i class="bi bi-info-circle me-2"></i>Customer Details</h6>
+                <div class="detail-item">
+                  <span class="detail-label">Customer Name</span>
+                  <span class="detail-value" id="customerDetailsName">Select a customer</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">Address</span>
+                  <span class="detail-value" id="customerDetailsAddress">Address will appear here</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="text-end mt-4">
-        <button class="btn btn-primary custom-btn" id="addToCartBtn">
-          <i class="bi bi-cart-plus me-2"></i>Add to Cart
-        </button>
+    </div>
+
+    <!-- Item Selection Card -->
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <i class="bi bi-box-seam"></i> Item Selection
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="row g-4">
+            <div class="col-md-6 position-relative">
+              <label for="ItemDetailsSelect" class="form-label">Select Item</label>
+              <select class="form-select form-select-lg" id="ItemDetailsSelect">
+                <option value="">Loading items...</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <div class="details-panel h-100">
+                <h6><i class="bi bi-info-circle me-2"></i>Item Details</h6>
+                <div class="detail-item">
+                  <span class="detail-label">Item Name</span>
+                  <span class="detail-value" id="ItemDetailsName">Select an item</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">Price</span>
+                  <span class="detail-value" id="ItemDetailsPrice">Price will appear here</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">Available Stock</span>
+                  <span class="detail-value" id="ItemDetailsStock">Stock will appear here</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-end mt-4">
+            <button class="btn btn-primary btn-icon" id="addToCartBtn">
+              <i class="bi bi-cart-plus"></i> Add to Cart
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="card glass-card shadow-lg border-0 rounded-4">
-    <div class="card-body p-4">
-      <h5 class="card-title mb-4 text-primary d-flex align-items-center">
-        <div class="border-gradient me-2" style="height: 24px;"></div>Shopping Cart
-      </h5>
-      <div class="table-responsive">
-        <table class="table mb-0">
-          <tbody class="table-light"></tbody>
-        </table>
-      </div>
-      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-4 pt-4 border-top">
-        <div class="h4 mb-3 mb-md-0">Total Amount: $0.00</div>
-        <button class="btn btn-success custom-btn" id="placeOrderButton">
-          Place Order<i class="bi bi-arrow-right ms-2"></i>
-        </button>
+    <!-- Shopping Cart Card -->
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <i class="bi bi-cart-check"></i> Shopping Cart
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+              <tr>
+                <th>Item Code</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Total</th>
+                <th>Action</th>
+              </tr>
+              </thead>
+              <tbody class="table-group-divider" id="cartTableBody">
+              <!-- Cart items will be added here -->
+              <tr>
+                <td colspan="6">
+                  <div class="empty-cart">
+                    <i class="bi bi-cart"></i>
+                    <p>Your cart is empty</p>
+                    <span class="text-muted">Select items to add to your order</span>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="total-section">
+            <div class="row align-items-center">
+              <div class="col-md-6">
+                <span class="total-amount" id="totalAmount">Total: $0.00</span>
+              </div>
+              <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                <button class="btn btn-success btn-icon" id="placeOrderButton">
+                  <i class="bi bi-check-circle"></i> Place Order
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -207,302 +168,9 @@
 
 <div id="toastContainer"></div>
 
+<!-- Bootstrap, jQuery and custom script -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script>
-  let cartItems = [];
-
-  $(document).ready(function() {
-    generateNextOrderId();
-    loadCustomers();
-    loadItems();
-    initializeEventHandlers();
-  });
-
-
-  function loadCustomers() {
-    $("#customerDetailsSelect").prop('disabled', true);
-    $.ajax({
-      method: "GET",
-      url: "http://localhost:8080/api/v1/customer/getAll",
-      success: function(response) {
-        if (response.code === 200 && response.data) {
-          const customers = response.data;
-          $("#customerDetailsSelect").empty().append('<option value="">Select a customer...</option>');
-          customers.forEach(customer => {
-            $("#customerDetailsSelect").append(
-                    `<option value="${customer.id}">${customer.name} (ID: ${customer.id})</option>`
-            );
-          });
-          window.customersData = customers;
-        } else {
-          showError("No customers found");
-        }
-      },
-      error: function() {
-        showError("Failed to load customers");
-      },
-      complete: function() {
-        $("#customerDetailsSelect").prop('disabled', false);
-      }
-    });
-  }
-
-  function loadItems() {
-    $("#ItemDetailsSelect").prop('disabled', true);
-    $.ajax({
-      method: "GET",
-      url: "http://localhost:8080/api/v1/item/getAll",
-      success: function(response) {
-        if (response.code === 200 && response.data) {
-          const items = response.data;
-          $("#ItemDetailsSelect").empty().append('<option value="">Select an item...</option>');
-          items.forEach(item => {
-            $("#ItemDetailsSelect").append(
-                    `<option value="${item.itemCode}">${item.name} (Code: ${item.itemCode})</option>`
-            );
-          });
-          window.itemsData = items;
-        } else {
-          showError("No items found");
-        }
-      },
-      error: function() {
-        showError("Failed to load items");
-      },
-      complete: function() {
-        $("#ItemDetailsSelect").prop('disabled', false);
-      }
-    });
-  }
-
-  function initializeEventHandlers() {
-    $("#customerDetailsSelect").on('change', function() {
-      const selectedId = $(this).val();
-      if (!selectedId) {
-        clearCustomerDetails();
-        return;
-      }
-      const selectedCustomer = window.customersData?.find(c => c.id.toString() === selectedId);
-      if (selectedCustomer) {
-        updateCustomerDetails(selectedCustomer);
-      } else {
-        showError("Customer data not found");
-        clearCustomerDetails();
-      }
-    });
-
-    $("#ItemDetailsSelect").on('change', function() {
-      const selectedCode = $(this).val();
-      if (!selectedCode) {
-        clearItemDetails();
-        return;
-      }
-      const selectedItem = window.itemsData?.find(i => i.itemCode.toString() === selectedCode);
-      if (selectedItem) {
-        updateItemDetails(selectedItem);
-      } else {
-        showError("Item data not found");
-        clearItemDetails();
-      }
-    });
-
-    $("#addToCartBtn").on('click', function() {
-      const selectedItemCode = $("#ItemDetailsSelect").val();
-      if (!selectedItemCode) {
-        showError("Please select an item first");
-        return;
-      }
-      const selectedItem = window.itemsData?.find(i => i.itemCode.toString() === selectedItemCode);
-      if (!selectedItem) {
-        showError("Selected item not found");
-        return;
-      }
-      const existingItem = cartItems.find(item => item.itemCode === selectedItem.itemCode);
-      if (existingItem) {
-        if (existingItem.quantity + 1 > selectedItem.qty) {
-          showError("Not enough stock available");
-          return;
-        }
-        existingItem.quantity += 1;
-        existingItem.total = existingItem.quantity * existingItem.unitPrice;
-      } else {
-        if (selectedItem.qty < 1) {
-          showError("Item out of stock");
-          return;
-        }
-        cartItems.push({
-          itemCode: selectedItem.itemCode,
-          name: selectedItem.name,
-          quantity: 1,
-          unitPrice: selectedItem.price,
-          total: selectedItem.price
-        });
-      }
-      updateCartTable();
-      updateTotalAmount();
-      showSuccess("Item added to cart");
-    });
-
-    $("#placeOrderButton").on('click', placeOrder);
-  }
-
-  function updateCustomerDetails(customer) {
-    $("#customerDetailsName").text(customer.name || 'N/A');
-    $("#customerDetailsAddress").text(customer.address || 'N/A');
-  }
-
-  function clearCustomerDetails() {
-    $("#customerDetailsName").text('Select a customer');
-    $("#customerDetailsAddress").text('Address will appear here');
-  }
-
-  function updateItemDetails(item) {
-    $("#ItemDetailsName").text(item.name || 'N/A');
-    $("#ItemDetailsPrice").text(`${item.price.toFixed(2)}` || 'N/A');
-    $("#ItemDetailsStock").text(item.qty || '0');
-  }
-
-  function clearItemDetails() {
-    $("#ItemDetailsName").text('Select an item');
-    $("#ItemDetailsPrice").text('Price will appear here');
-    $("#ItemDetailsStock").text('Stock will appear here');
-  }
-
-  function updateCartTable() {
-    const tbody = $("table tbody");
-    tbody.empty();
-
-    tbody.append(`
-                <tr>
-                    <th>Item Code</th>
-                    <th>Name</th>
-                    <th>Quantity</th>
-                    <th>Unit Price</th>
-                    <th>Total</th>
-                    <th>Action</th>
-                </tr>
-            `);
-
-    cartItems.forEach(item => {
-      tbody.append(`
-                    <tr>
-                        <td>${item.itemCode}</td>
-                        <td>${item.name}</td>
-                        <td>${item.quantity}</td>
-                        <td>${item.unitPrice.toFixed(2)}</td>
-                        <td>${item.total.toFixed(2)}</td>
-                        <td>
-                            <button class="remove-btn" onclick="removeFromCart('${item.itemCode}')">
-                                <i class="bi bi-trash me-1"></i>Remove
-                            </button>
-                        </td>
-                    </tr>
-                `);
-    });
-  }
-
-  function removeFromCart(itemCode) {
-    cartItems = cartItems.filter(item => item.itemCode !== itemCode);
-    updateCartTable();
-    updateTotalAmount();
-    showSuccess("Item removed from cart");
-  }
-
-  function updateTotalAmount() {
-    const total = cartItems.reduce((sum, item) => sum + item.total, 0);
-    $(".h4").text(`Total Amount: ${total.toFixed(2)}`);
-  }
-
-  function showToast(message, type = 'success') {
-    const toast = $('<div>').addClass('toast').addClass(type);
-    const toastContent = $('<div>').addClass('toast-content').text(message);
-    const closeBtn = $('<button>')
-            .addClass('toast-close')
-            .html('<i class="bi bi-x"></i>')
-            .click(function() {
-              toast.removeClass('show');
-              setTimeout(() => toast.remove(), 300);
-            });
-
-    toast.append(toastContent, closeBtn);
-    $('#toastContainer').append(toast);
-
-    setTimeout(() => toast.addClass('show'), 10);
-    setTimeout(() => {
-      toast.removeClass('show');
-      setTimeout(() => toast.remove(), 300);
-    }, 5000);
-  }
-
-  function showSuccess(message) {
-    showToast(message, 'success');
-  }
-
-  function showError(message) {
-    showToast(message, 'error');
-  }
-
-  function placeOrder() {
-    const selectedCustomerId = $("#customerDetailsSelect").val();
-    if (!selectedCustomerId) {
-      showError("Please select a customer");
-      return;
-    }
-
-    if (cartItems.length === 0) {
-      showError("Cart is empty. Please add items to cart");
-      return;
-    }
-
-    const orderId = $("#orderId").val();
-    if (!orderId) {
-      showError("Invalid order ID");
-      return;
-    }
-
-    const total = cartItems.reduce((sum, item) => sum + item.total, 0);
-
-    const orderDetails = cartItems.map(item => ({
-      item: {
-        itemCode: item.itemCode
-      },
-      quantity: item.quantity,
-      unitPrice: item.unitPrice
-    }));
-
-    const order = {
-      orderId: orderId,
-      customerId: selectedCustomerId,
-      orderDetails: orderDetails,
-      total: total
-    };
-
-    $.ajax({
-      method: "POST",
-      url: "http://localhost:8080/api/v1/order/save",
-      contentType: "application/json",
-      data: JSON.stringify(order),
-      success: function(response) {
-        if (response.code === 201) {
-          showSuccess("Order placed successfully!");
-          cartItems = [];
-          updateCartTable();
-          updateTotalAmount();
-          clearCustomerDetails();
-          clearItemDetails();
-          $("#customerDetailsSelect").val("");
-          $("#ItemDetailsSelect").val("");
-          generateNextOrderId();
-        } else {
-          showError("Failed to place order: " + (response.message || "Unknown error"));
-        }
-      },
-      error: function() {
-        showError("Failed to place order");
-      }
-    });
-  }
-</script>
+<script src="js/order.js"></script>
 </body>
 </html>

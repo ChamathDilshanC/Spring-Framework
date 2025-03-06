@@ -8,6 +8,7 @@ import lk.ijse.spring_boot.util.ResponseUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,7 @@ public class CustomerServiceImpl implements CustomerService {
         return customerDTOS;
     }
     @Override
+
     public void updateCustomer(CustomerDTO customerDTO) {
         if (customerRepo.existsById(customerDTO.getId())){
             Customer customer = modelMapper.map(customerDTO, Customer.class);
@@ -70,5 +72,9 @@ public class CustomerServiceImpl implements CustomerService {
         } else {
             return "C" + newNumber;
         }
+    }
+    @Transactional
+    public Integer getCustomerCount() {
+        return customerRepo.getCustomerCount();
     }
 }

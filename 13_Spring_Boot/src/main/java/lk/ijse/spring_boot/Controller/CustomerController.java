@@ -8,17 +8,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("api/v1/customer")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class    CustomerController {
     // Property Injection
     @Autowired
     private CustomerServiceImpl customerService;
 
     @GetMapping(path = "getAll")
-    public ResponseUtil getCustomer(){
+    public ResponseUtil getCustomer() {
+        System.out.println(customerService.getAllCustomers());
         return  new ResponseUtil(200, "Customer List", customerService.getAllCustomers());
     }
 
@@ -39,7 +43,13 @@ public class    CustomerController {
         return new ResponseUtil(201, "Customer Deleted Successfully", null);
     }
     @GetMapping(path = "generateNextId")
-    public ResponseUtil generateId(){
+    public ResponseUtil generateId() {
         return new ResponseUtil(201, "Customer Id Generated", customerService.generateNextCustomerId());
     }
+    @GetMapping(path = "getCustomerCount")
+    public Integer getCustomerCount() {
+        Integer customerCount = customerService.getCustomerCount();
+        return new ResponseUtil(200, "Customer Count", customerCount).getCode();
+    }
+    
 }

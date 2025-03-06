@@ -1,46 +1,59 @@
 let cartItems = [];
 
 $(document).ready(function() {
-    generateNextOrderId()
-    loadCustomers();
-    loadItems();
-    initializeEventHandlers();
+    initializeApp();
 
-    // Initialize toast container if it doesn't exist
     if (!$('#toastContainer').length) {
         $('body').append('<div id="toastContainer"></div>');
     }
 });
 
-generateNextOrderId()
+function initializeApp() {
+    generateNextOrderId();
+
+    loadCustomers();
+    loadItems();
+
+    initializeEventHandlers();
+
+    updateCartTable();
+}
 
 function generateNextOrderId() {
+    $("#orderIdDisplay").html('<span class="spinner-border spinner-border-sm me-2"></span>Generating...');
+
     $.ajax({
         method: "GET",
-        url: "http://localhost:8080/api/v1/order/getNextId",
+        url: "http://localhost:8080/api/v1/order/generateNextId",
         success: function (response) {
-            if (response.code === 200 && response.data) {
+            if (response.code === 201 && response.data) {
                 $("#orderId").val(response.data);
+                $("#orderIdDisplay").text(response.data);
                 console.log("Next order ID:", response.data);
             } else {
                 showError("Failed to generate order ID");
+                $("#orderIdDisplay").text("Error");
+                console.error("Error response:", response);
             }
         },
         error: function (xhr, status, error) {
             showError("Failed to generate order ID");
+            $("#orderIdDisplay").text("Error");
             console.error("Error details:", {xhr, status, error});
         }
     });
 }
+
 function loadCustomers() {
-    $("#customerDetailsSelect").prop('disabled', true);
-    $("#customerDetails").addClass('loading');
+    $("#customerDetailsSelect")
+        .prop('disabled', true)
+        .html('<option value="">Loading customers...</option>');
 
     $.ajax({
         method: "GET",
         url: "http://localhost:8080/api/v1/customer/getAll",
         success: function(response) {
-            if (response.code === 200 && response.data) {
+            if (response.code === 200 && response.data && response.data.length > 0) {
                 const customers = response.data;
 
                 $("#customerDetailsSelect")
@@ -49,36 +62,43 @@ function loadCustomers() {
 
                 customers.forEach(customer => {
                     $("#customerDetailsSelect").append(
-                        `<option value="${customer.id}">
-                            ${customer.name} (ID: ${customer.id})
-                        </option>`
+                        `<option value="${customer.id}">${customer.name} (ID: ${customer.id})</option>`
                     );
                 });
 
                 window.customersData = customers;
             } else {
-                showError("No customers found");
+                $("#customerDetailsSelect")
+                    .empty()
+                    .append('<option value="">No customers available</option>');
+
+                showError("No customers found in the system");
             }
         },
         error: function(xhr, status, error) {
-            showError("Failed to load customers");
+            $("#customerDetailsSelect")
+                .empty()
+                .append('<option value="">Error loading customers</option>');
+
+            showError("Failed to load customers. Please check server connection.");
             console.error("Error details:", {xhr, status, error});
         },
         complete: function() {
             $("#customerDetailsSelect").prop('disabled', false);
-            $("#customerDetails").removeClass('loading');
         }
     });
 }
 
 function loadItems() {
-    $("#ItemDetailsSelect").prop('disabled', true);
+    $("#ItemDetailsSelect")
+        .prop('disabled', true)
+        .html('<option value="">Loading items...</option>');
 
     $.ajax({
         method: "GET",
         url: "http://localhost:8080/api/v1/item/getAll",
         success: function(response) {
-            if (response.code === 200 && response.data) {
+            if (response.code === 200 && response.data && response.data.length > 0) {
                 const items = response.data;
 
                 $("#ItemDetailsSelect")
@@ -87,19 +107,25 @@ function loadItems() {
 
                 items.forEach(item => {
                     $("#ItemDetailsSelect").append(
-                        `<option value="${item.itemCode}">
-                            ${item.name} (Code: ${item.itemCode})
-                        </option>`
+                        `<option value="${item.itemCode}">${item.name} (Code: ${item.itemCode})</option>`
                     );
                 });
 
                 window.itemsData = items;
             } else {
-                showError("No items found");
+                $("#ItemDetailsSelect")
+                    .empty()
+                    .append('<option value="">No items available</option>');
+
+                showError("No items found in the system");
             }
         },
         error: function(xhr, status, error) {
-            showError("Failed to load items");
+            $("#ItemDetailsSelect")
+                .empty()
+                .append('<option value="">Error loading items</option>');
+
+            showError("Failed to load items. Please check server connection.");
             console.error("Error details:", {xhr, status, error});
         },
         complete: function() {
@@ -109,7 +135,6 @@ function loadItems() {
 }
 
 function initializeEventHandlers() {
-    // Customer select change handler
     $("#customerDetailsSelect").on('change', function() {
         const selectedId = $(this).val();
 
@@ -130,7 +155,6 @@ function initializeEventHandlers() {
         }
     });
 
-    // Item select change handler
     $("#ItemDetailsSelect").on('change', function() {
         const selectedCode = $(this).val();
 
@@ -151,7 +175,6 @@ function initializeEventHandlers() {
         }
     });
 
-    // Add to cart button handler
     $("#addToCartBtn").on('click', function() {
         const selectedItemCode = $("#ItemDetailsSelect").val();
         if (!selectedItemCode) {
@@ -168,19 +191,19 @@ function initializeEventHandlers() {
             return;
         }
 
-        // Add item to cart
         const existingItem = cartItems.find(item => item.itemCode === selectedItem.itemCode);
 
         if (existingItem) {
             if (existingItem.quantity + 1 > selectedItem.qty) {
-                showError("Not enough stock available");
+                showError(`Not enough stock available for ${selectedItem.name}`);
                 return;
             }
             existingItem.quantity += 1;
             existingItem.total = existingItem.quantity * existingItem.unitPrice;
+            showSuccess(`Increased ${selectedItem.name} quantity to ${existingItem.quantity}`);
         } else {
             if (selectedItem.qty < 1) {
-                showError("Item out of stock");
+                showError(`${selectedItem.name} is out of stock`);
                 return;
             }
             cartItems.push({
@@ -190,15 +213,40 @@ function initializeEventHandlers() {
                 unitPrice: selectedItem.price,
                 total: selectedItem.price
             });
+            showSuccess(`Added ${selectedItem.name} to cart`);
         }
 
         updateCartTable();
         updateTotalAmount();
-        showSuccess("Item added to cart");
     });
 
-    // Place order button handler
-    $("#placeOrderButton").on('click', placeOrder);
+    $("#placeOrderButton").on('click', function() {
+        if (validateOrder()) {
+            $(this).html('<span class="spinner-border spinner-border-sm me-2"></span>Processing...').prop('disabled', true);
+            placeOrder();
+        }
+    });
+}
+
+function validateOrder() {
+    const selectedCustomerId = $("#customerDetailsSelect").val();
+    if (!selectedCustomerId) {
+        showError("Please select a customer");
+        return false;
+    }
+
+    if (cartItems.length === 0) {
+        showError("Cart is empty. Please add items to cart");
+        return false;
+    }
+
+    const orderId = $("#orderId").val();
+    if (!orderId) {
+        showError("Invalid order ID");
+        return false;
+    }
+
+    return true;
 }
 
 function updateCustomerDetails(customer) {
@@ -214,7 +262,19 @@ function clearCustomerDetails() {
 function updateItemDetails(item) {
     $("#ItemDetailsName").text(item.name || 'N/A');
     $("#ItemDetailsPrice").text(`$${item.price.toFixed(2)}` || 'N/A');
-    $("#ItemDetailsStock").text(item.qty || '0');
+
+    const stockLevel = item.qty || 0;
+    let stockBadge = '';
+
+    if (stockLevel > 10) {
+        stockBadge = `<span class="badge bg-success-subtle text-success">${stockLevel} in stock</span>`;
+    } else if (stockLevel > 0) {
+        stockBadge = `<span class="badge bg-warning-subtle text-warning">Low stock: ${stockLevel}</span>`;
+    } else {
+        stockBadge = `<span class="badge bg-danger-subtle text-danger">Out of stock</span>`;
+    }
+
+    $("#ItemDetailsStock").html(stockBadge);
 }
 
 function clearItemDetails() {
@@ -224,29 +284,48 @@ function clearItemDetails() {
 }
 
 function updateCartTable() {
-    const tbody = $("table tbody");
+    const tbody = $("#cartTableBody");
     tbody.empty();
 
-    // Add table header
-    tbody.append(`
-        <tr>
-            <th>Item Code</th>
-            <th>Name</th>
-            <th>Quantity</th>
-            <th>Unit Price</th>
-            <th>Total</th>
-            <th>Action</th>
-        </tr>
-    `);
+    if (cartItems.length === 0) {
+        tbody.html(`
+            <tr>
+                <td colspan="6">
+                    <div class="empty-cart">
+                        <i class="bi bi-cart"></i>
+                        <p>Your cart is empty</p>
+                        <span class="text-muted">Select items to add to your order</span>
+                    </div>
+                </td>
+            </tr>
+        `);
+        return;
+    }
 
-    cartItems.forEach(item => {
+    cartItems.forEach((item, index) => {
         tbody.append(`
             <tr>
-                <td>${item.itemCode}</td>
-                <td>${item.name}</td>
-                <td>${item.quantity}</td>
+                <td>
+                    <span class="badge bg-primary-subtle text-primary">${item.itemCode}</span>
+                </td>
+                <td>
+                    <span class="fw-medium">${item.name}</span>
+                </td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-sm btn-light me-2" onclick="updateQuantity('${item.itemCode}', -1)">
+                            <i class="bi bi-dash"></i>
+                        </button>
+                        <span class="fw-medium">${item.quantity}</span>
+                        <button class="btn btn-sm btn-light ms-2" onclick="updateQuantity('${item.itemCode}', 1)">
+                            <i class="bi bi-plus"></i>
+                        </button>
+                    </div>
+                </td>
                 <td>$${item.unitPrice.toFixed(2)}</td>
-                <td>$${item.total.toFixed(2)}</td>
+                <td>
+                    <span class="fw-semibold">$${item.total.toFixed(2)}</span>
+                </td>
                 <td>
                     <button class="remove-btn" onclick="removeFromCart('${item.itemCode}')">
                         <i class="bi bi-trash me-1"></i>
@@ -259,35 +338,63 @@ function updateCartTable() {
 }
 
 function removeFromCart(itemCode) {
-    cartItems = cartItems.filter(item => item.itemCode !== itemCode);
+    const itemToRemove = cartItems.find(item => item.itemCode === itemCode);
+    if (itemToRemove) {
+        cartItems = cartItems.filter(item => item.itemCode !== itemCode);
+        updateCartTable();
+        updateTotalAmount();
+        showSuccess(`Removed ${itemToRemove.name} from cart`);
+    }
+}
+
+function updateQuantity(itemCode, change) {
+    const selectedItem = cartItems.find(item => item.itemCode === itemCode);
+    if (!selectedItem) return;
+
+    const inventoryItem = window.itemsData?.find(i => i.itemCode.toString() === itemCode);
+    if (!inventoryItem) return;
+
+    const newQuantity = selectedItem.quantity + change;
+
+    if (newQuantity < 1) {
+        return;
+    }
+
+    if (change > 0 && newQuantity > inventoryItem.qty) {
+        showError(`Not enough stock available for ${selectedItem.name}`);
+        return;
+    }
+
+    selectedItem.quantity = newQuantity;
+    selectedItem.total = selectedItem.quantity * selectedItem.unitPrice;
+
     updateCartTable();
     updateTotalAmount();
-    showSuccess("Item removed from cart");
 }
 
 function updateTotalAmount() {
     const total = cartItems.reduce((sum, item) => sum + item.total, 0);
-    $(".h4").text(`Total Amount: $${total.toFixed(2)}`);
+    $("#totalAmount").text(`Total: $${total.toFixed(2)}`);
+
+    $("#placeOrderButton").prop('disabled', cartItems.length === 0);
 }
 
 function showToast(message, type = 'success') {
     const toast = $('<div>').addClass('toast').addClass(type);
 
-    const iconClass = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
-    const toastIcon = $('<div>').addClass('toast-icon').append(
-        $('<i>').addClass('fas ' + iconClass)
-    );
+    const iconClass = type === 'success' ? 'bi-check-circle' : 'bi-exclamation-triangle';
+    const toastIcon = $('<i>').addClass(`bi ${iconClass} me-2`);
 
     const toastContent = $('<div>').addClass('toast-content');
-    const toastTitle = $('<div>').addClass('toast-title').text(
+    const toastTitle = $('<div>').addClass('fw-semibold mb-1').text(
         type === 'success' ? 'Success' : 'Error'
     );
-    const toastMessage = $('<div>').addClass('toast-message').text(message);
+    const toastMessage = $('<div>').addClass('text-secondary small').text(message);
     toastContent.append(toastTitle, toastMessage);
 
     const closeBtn = $('<button>')
         .addClass('toast-close')
-        .html('<i class="fas fa-times"></i>')
+        .html('<i class="bi bi-x"></i>')
         .click(function() {
             toast.removeClass('show');
             setTimeout(function() {
@@ -320,28 +427,11 @@ function showError(message) {
 
 function placeOrder() {
     const selectedCustomerId = $("#customerDetailsSelect").val();
-    if (!selectedCustomerId) {
-        showError("Please select a customer");
-        return;
-    }
-
-    if (cartItems.length === 0) {
-        showError("Cart is empty. Please add items to cart");
-        return;
-    }
-
     const orderId = $("#orderId").val();
-    if (!orderId) {
-        showError("Invalid order ID");
-        return;
-    }
-
     const total = cartItems.reduce((sum, item) => sum + item.total, 0);
 
     const orderDetails = cartItems.map(item => ({
-        item: {
-            itemCode: item.itemCode
-        },
+        itemCode: item.itemCode,
         quantity: item.quantity,
         unitPrice: item.unitPrice
     }));
@@ -353,31 +443,44 @@ function placeOrder() {
         total: total
     };
 
+    console.log("Sending order to backend:", JSON.stringify(order, null, 2));
+
     $.ajax({
         method: "POST",
         url: "http://localhost:8080/api/v1/order/save",
         contentType: "application/json",
         data: JSON.stringify(order),
         success: function(response) {
+            console.log("Order response:", response);
             if (response.code === 201) {
-                showSuccess("Order placed successfully!");
-                // Clear cart and reset form
+
                 cartItems = [];
                 updateCartTable();
                 updateTotalAmount();
                 clearCustomerDetails();
+                showSuccess("Your Order "+ orderId + " placed successfully");
                 clearItemDetails();
                 $("#customerDetailsSelect").val("");
                 $("#ItemDetailsSelect").val("");
-                // Generate new order ID
-                setOrderId();
+
+                generateNextOrderId();
             } else {
                 showError("Failed to place order: " + (response.message || "Unknown error"));
+                console.error("Order save failed:", response);
             }
         },
         error: function(xhr, status, error) {
             showError("Failed to place order");
-            console.error("Error details:", {xhr, status, error});
+            console.error("Error details:", {
+                status: xhr.status,
+                statusText: xhr.statusText,
+                responseText: xhr.responseText
+            });
+        },
+        complete: function() {
+            $("#placeOrderButton")
+                .html('<i class="bi bi-check-circle"></i> Place Order')
+                .prop('disabled', false);
         }
     });
 }

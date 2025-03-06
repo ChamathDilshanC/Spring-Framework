@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="dbb0351e-14d4-4809-8606-5b3d6c6226e1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/14_Springboot_Frontend/src/main/java/lk/ijse/js/dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/AppInitializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/AppInitializer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/bean/Boy.class" beforeDir="false" afterPath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/bean/Boy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/bean/Girl1.class" beforeDir="false" afterPath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/bean/Girl1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/bean/Girl2.class" beforeDir="false" afterPath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/bean/Girl2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/bean/SpringBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/bean/SpringBean.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/config/AppConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/config/AppConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/di/Boy.class" beforeDir="false" afterPath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/di/Boy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/di/Girl.class" beforeDir="false" afterPath="$PROJECT_DIR$/03_Spring_Bean_DI _(Dependency_Injection)/target/classes/lk/ijse/di/Girl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/10_BackEnd/10_BackEnd.iml" beforeDir="false" afterPath="$PROJECT_DIR$/10_BackEnd/10_BackEnd.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/13_Spring_Boot/src/main/java/lk/ijse/spring_boot/Controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/13_Spring_Boot/src/main/java/lk/ijse/spring_boot/Controller/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/13_Spring_Boot/src/main/java/lk/ijse/spring_boot/Repo/CustomerRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/13_Spring_Boot/src/main/java/lk/ijse/spring_boot/Repo/CustomerRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/13_Spring_Boot/src/main/java/lk/ijse/spring_boot/service/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/13_Spring_Boot/src/main/java/lk/ijse/spring_boot/service/CustomerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/13_Spring_Boot/src/main/java/lk/ijse/spring_boot/service/Impl/CustomerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/13_Spring_Boot/src/main/java/lk/ijse/spring_boot/service/Impl/CustomerServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/14_Springboot_Frontend/src/main/java/lk/ijse/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/14_Springboot_Frontend/src/main/java/lk/ijse/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/14_Springboot_Frontend/target/classes/lk/ijse/Item.html" beforeDir="false" afterPath="$PROJECT_DIR$/14_Springboot_Frontend/target/classes/lk/ijse/Item.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/14_Springboot_Frontend/target/classes/lk/ijse/customer.html" beforeDir="false" afterPath="$PROJECT_DIR$/14_Springboot_Frontend/target/classes/lk/ijse/customer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/14_Springboot_Frontend/target/classes/lk/ijse/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/14_Springboot_Frontend/target/classes/lk/ijse/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/14_Springboot_Frontend/target/classes/lk/ijse/js/item.js" beforeDir="false" afterPath="$PROJECT_DIR$/14_Springboot_Frontend/target/classes/lk/ijse/js/item.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/14_Springboot_Frontend/target/classes/lk/ijse/js/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/14_Springboot_Frontend/target/classes/lk/ijse/js/order.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/14_Springboot_Frontend/target/classes/lk/ijse/js/temp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/14_Springboot_Frontend/target/classes/lk/ijse/order.html" beforeDir="false" afterPath="$PROJECT_DIR$/14_Springboot_Frontend/target/classes/lk/ijse/order.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ChamathDilshanC&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ChamathDilshanC/Spring-Framework.git&quot;,
+    &quot;accountId&quot;: &quot;c78509a1-72d5-470a-8e06-93ca28f027ab&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2td4p1YD5XZf3e5JatdQMmnf7FW" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "JavaScript Debug.customer.html.executor": "Run",
+    "JavaScript Debug.dashboard.html.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.Application.executor": "Run",
+    "Spring Boot.SpringSecurityApplicationWork.executor": "Run",
+    "Spring Boot.Z15SpringSequrityApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "jdk.selected.JAVA_MODULE": "openjdk-21",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/dilsh/Desktop/GitHubProjects",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.21679688",
+    "project.structure.side.proportion": "0.39649844",
+    "run.configurations.included.in.services": "true",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\dilsh\Desktop\Spring-Framework" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.SpringSecurityApplicationWork">
+    <configuration name="customer.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Spring-Framework/14_Springboot_Frontend/src/main/java/lk/ijse/customer.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="dashboard.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Spring-Framework/14_Springboot_Frontend/src/main/java/lk/ijse/dashboard.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="Spring_Boot" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="lk.ijse.spring_boot.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SpringSecurityApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="Spring_Security" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="lk.ijse.spring_security.SpringSecurityApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SpringSecurityApplicationWork" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="Spring_Security" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="lk.ijse.spring_security.SpringSecurityApplicationWork" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="JavaScript Debug.customer.html" />
+      <item itemvalue="JavaScript Debug.dashboard.html" />
+      <item itemvalue="Spring Boot.Application" />
+      <item itemvalue="Spring Boot.SpringSecurityApplicationWork" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.customer.html" />
+        <item itemvalue="JavaScript Debug.dashboard.html" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dbb0351e-14d4-4809-8606-5b3d6c6226e1" name="Changes" comment="" />
+      <created>1740668802399</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1740668802399</updated>
+      <workItem from="1740668805900" duration="731000" />
+      <workItem from="1740678290772" duration="548000" />
+      <workItem from="1740678883955" duration="231000" />
+      <workItem from="1740679173615" duration="308000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.md" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
