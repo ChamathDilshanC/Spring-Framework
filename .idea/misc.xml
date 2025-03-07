@@ -25,6 +25,8 @@
         <option value="$PROJECT_DIR$/15_Spring_Security/pom.xml" />
         <option value="$PROJECT_DIR$/Z16_springwithjwt-master/pom.xml" />
         <option value="$PROJECT_DIR$/Z16_Frontend/pom.xml" />
+        <option value="$PROJECT_DIR$/Z17_Springboot_Bean_Validation/pom.xml" />
+        <option value="$PROJECT_DIR$/Z18_Springboot_Logins/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

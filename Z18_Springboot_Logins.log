@@ -1,0 +1,60 @@
+2025-03-07T11:32:27.580+05:30  INFO 8648 --- [Z18_Springboot_Logins] [main] l.i.z.Z18SpringbootLoginsApplication     : Starting Z18SpringbootLoginsApplication using Java 21.0.2 with PID 8648 (C:\Users\dilsh\Desktop\Spring-Framework\Z18_Springboot_Logins\target\classes started by Chamath in C:\Users\dilsh\Desktop\Spring-Framework)
+2025-03-07T11:32:27.584+05:30  INFO 8648 --- [Z18_Springboot_Logins] [main] l.i.z.Z18SpringbootLoginsApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-03-07T11:32:28.928+05:30  INFO 8648 --- [Z18_Springboot_Logins] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-07T11:32:28.946+05:30  INFO 8648 --- [Z18_Springboot_Logins] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-07T11:32:28.947+05:30  INFO 8648 --- [Z18_Springboot_Logins] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-03-07T11:32:29.010+05:30  INFO 8648 --- [Z18_Springboot_Logins] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-07T11:32:29.011+05:30  INFO 8648 --- [Z18_Springboot_Logins] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1361 ms
+2025-03-07T11:32:29.211+05:30 DEBUG 8648 --- [Z18_Springboot_Logins] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 3 mappings in 'requestMappingHandlerMapping'
+2025-03-07T11:32:29.267+05:30 DEBUG 8648 --- [Z18_Springboot_Logins] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2025-03-07T11:32:29.295+05:30 DEBUG 8648 --- [Z18_Springboot_Logins] [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-03-07T11:32:29.338+05:30 DEBUG 8648 --- [Z18_Springboot_Logins] [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-03-07T11:32:29.435+05:30  INFO 8648 --- [Z18_Springboot_Logins] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-07T11:32:29.444+05:30  INFO 8648 --- [Z18_Springboot_Logins] [main] l.i.z.Z18SpringbootLoginsApplication     : Started Z18SpringbootLoginsApplication in 2.503 seconds (process running for 3.33)
+2025-03-07T11:33:04.990+05:30  INFO 8648 --- [Z18_Springboot_Logins] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-03-07T11:33:04.995+05:30  INFO 8648 --- [Z18_Springboot_Logins] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-03-07T11:33:08.837+05:30  INFO 6712 --- [Z18_Springboot_Logins] [main] l.i.z.Z18SpringbootLoginsApplication     : Starting Z18SpringbootLoginsApplication using Java 21.0.2 with PID 6712 (C:\Users\dilsh\Desktop\Spring-Framework\Z18_Springboot_Logins\target\classes started by Chamath in C:\Users\dilsh\Desktop\Spring-Framework)
+2025-03-07T11:33:08.841+05:30  INFO 6712 --- [Z18_Springboot_Logins] [main] l.i.z.Z18SpringbootLoginsApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-03-07T11:33:10.097+05:30  INFO 6712 --- [Z18_Springboot_Logins] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-07T11:33:10.114+05:30  INFO 6712 --- [Z18_Springboot_Logins] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-07T11:33:10.114+05:30  INFO 6712 --- [Z18_Springboot_Logins] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-03-07T11:33:10.169+05:30  INFO 6712 --- [Z18_Springboot_Logins] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-07T11:33:10.170+05:30  INFO 6712 --- [Z18_Springboot_Logins] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1261 ms
+2025-03-07T11:33:10.331+05:30 DEBUG 6712 --- [Z18_Springboot_Logins] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 3 mappings in 'requestMappingHandlerMapping'
+2025-03-07T11:33:10.387+05:30 DEBUG 6712 --- [Z18_Springboot_Logins] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2025-03-07T11:33:10.413+05:30 DEBUG 6712 --- [Z18_Springboot_Logins] [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-03-07T11:33:10.451+05:30 DEBUG 6712 --- [Z18_Springboot_Logins] [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-03-07T11:33:10.550+05:30  INFO 6712 --- [Z18_Springboot_Logins] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-07T11:33:10.558+05:30  INFO 6712 --- [Z18_Springboot_Logins] [main] l.i.z.Z18SpringbootLoginsApplication     : Started Z18SpringbootLoginsApplication in 2.356 seconds (process running for 3.195)
+2025-03-07T11:34:26.953+05:30  INFO 6712 --- [Z18_Springboot_Logins] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-03-07T11:34:26.958+05:30  INFO 6712 --- [Z18_Springboot_Logins] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-03-07T11:34:30.045+05:30  INFO 16192 --- [Z18_Springboot_Logins] [main] l.i.z.Z18SpringbootLoginsApplication     : Starting Z18SpringbootLoginsApplication using Java 21.0.2 with PID 16192 (C:\Users\dilsh\Desktop\Spring-Framework\Z18_Springboot_Logins\target\classes started by Chamath in C:\Users\dilsh\Desktop\Spring-Framework)
+2025-03-07T11:34:30.048+05:30  INFO 16192 --- [Z18_Springboot_Logins] [main] l.i.z.Z18SpringbootLoginsApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-03-07T11:34:31.310+05:30  INFO 16192 --- [Z18_Springboot_Logins] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-07T11:34:31.328+05:30  INFO 16192 --- [Z18_Springboot_Logins] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-07T11:34:31.329+05:30  INFO 16192 --- [Z18_Springboot_Logins] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-03-07T11:34:31.389+05:30  INFO 16192 --- [Z18_Springboot_Logins] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-07T11:34:31.390+05:30  INFO 16192 --- [Z18_Springboot_Logins] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1281 ms
+2025-03-07T11:34:31.620+05:30 DEBUG 16192 --- [Z18_Springboot_Logins] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 3 mappings in 'requestMappingHandlerMapping'
+2025-03-07T11:34:31.693+05:30 DEBUG 16192 --- [Z18_Springboot_Logins] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2025-03-07T11:34:31.718+05:30 DEBUG 16192 --- [Z18_Springboot_Logins] [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-03-07T11:34:31.756+05:30 DEBUG 16192 --- [Z18_Springboot_Logins] [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-03-07T11:34:31.857+05:30  INFO 16192 --- [Z18_Springboot_Logins] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-07T11:34:31.863+05:30  INFO 16192 --- [Z18_Springboot_Logins] [main] l.i.z.Z18SpringbootLoginsApplication     : Started Z18SpringbootLoginsApplication in 2.465 seconds (process running for 3.365)
+2025-03-07T11:35:51.624+05:30  INFO 16192 --- [Z18_Springboot_Logins] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-03-07T11:35:51.635+05:30  INFO 16192 --- [Z18_Springboot_Logins] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-03-07T11:35:57.909+05:30  INFO 13432 --- [Z18_Springboot_Logins] [main] l.i.z.Z18SpringbootLoginsApplication     : Starting Z18SpringbootLoginsApplication using Java 21.0.2 with PID 13432 (C:\Users\dilsh\Desktop\Spring-Framework\Z18_Springboot_Logins\target\classes started by Chamath in C:\Users\dilsh\Desktop\Spring-Framework)
+2025-03-07T11:35:57.912+05:30  INFO 13432 --- [Z18_Springboot_Logins] [main] l.i.z.Z18SpringbootLoginsApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-03-07T11:35:59.159+05:30  INFO 13432 --- [Z18_Springboot_Logins] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-07T11:35:59.179+05:30  INFO 13432 --- [Z18_Springboot_Logins] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-07T11:35:59.180+05:30  INFO 13432 --- [Z18_Springboot_Logins] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-03-07T11:35:59.246+05:30  INFO 13432 --- [Z18_Springboot_Logins] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-07T11:35:59.246+05:30  INFO 13432 --- [Z18_Springboot_Logins] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1270 ms
+2025-03-07T11:35:59.514+05:30 DEBUG 13432 --- [Z18_Springboot_Logins] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 3 mappings in 'requestMappingHandlerMapping'
+2025-03-07T11:35:59.584+05:30 DEBUG 13432 --- [Z18_Springboot_Logins] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2025-03-07T11:35:59.609+05:30 DEBUG 13432 --- [Z18_Springboot_Logins] [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-03-07T11:35:59.656+05:30 DEBUG 13432 --- [Z18_Springboot_Logins] [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-03-07T11:35:59.761+05:30  INFO 13432 --- [Z18_Springboot_Logins] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-07T11:35:59.768+05:30  INFO 13432 --- [Z18_Springboot_Logins] [main] l.i.z.Z18SpringbootLoginsApplication     : Started Z18SpringbootLoginsApplication in 2.537 seconds (process running for 3.368)
+2025-03-07T11:50:02.145+05:30  INFO 13432 --- [Z18_Springboot_Logins] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-03-07T11:50:02.152+05:30  INFO 13432 --- [Z18_Springboot_Logins] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
