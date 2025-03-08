@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dbb0351e-14d4-4809-8606-5b3d6c6226e1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Z16_Frontend/src/main/java/lk/ijse/Js/admin.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Z17_Springboot_Bean_Validation/src/main/java/lk/ijse/z17_springboot_bean_validation/Advice/GlobalExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Z17_Springboot_Bean_Validation/src/main/java/lk/ijse/z17_springboot_bean_validation/Controller/CustomerController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Z17_Springboot_Bean_Validation/src/main/java/lk/ijse/z17_springboot_bean_validation/DTO/CustomerDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Z17_Springboot_Bean_Validation/src/main/java/lk/ijse/z17_springboot_bean_validation/DTO/ResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Z18_Springboot_Logins/src/main/java/lk/ijse/z18_springboot_logins/Controller/DemoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Z16_springwithjwt-master/src/main/java/org/example/springwithjwt/dto/AuthDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Z16_springwithjwt-master/src/main/java/org/example/springwithjwt/dto/AuthDTO.java" afterDir="false" />
-    </list>
+    <list default="true" id="dbb0351e-14d4-4809-8606-5b3d6c6226e1" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

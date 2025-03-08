@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modern Login UI</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/tost.css">
     <style>
         .custom-shadow {
             box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.1), 0 10px 10px -5px rgba(59, 130, 246, 0.04);
@@ -41,6 +42,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                     <input type="email" id="email" class="w-full focus:outline-none text-gray-700" placeholder="Enter your email">
+
                 </div>
             </div>
 
@@ -66,7 +68,8 @@
         </p>
     </div>
 </div>
-<script src="JQuery/jQuery.mim.js"></script>
+<div class="toast-container" id="toastContainer"></div>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
     // Add focus effects to input containers
     const inputContainers = document.querySelectorAll('.form-input');

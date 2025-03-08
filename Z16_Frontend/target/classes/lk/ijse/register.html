@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modern Sign Up UI</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/tost.css">
     <style>
         .custom-shadow {
             box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.1), 0 10px 10px -5px rgba(59, 130, 246, 0.04);
@@ -80,7 +81,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg transition duration-150 ease-in-out focus:outline-none focus:shadow-outline">
+            <button type="submit" id="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg transition duration-150 ease-in-out focus:outline-none focus:shadow-outline">
                 Sign Up
             </button>
         </form>
@@ -94,7 +95,7 @@
     </div>
 </div>
 
-<script src="JQuery/jQuery.mim.js"></script>
+<script src="JQuery/jquery-3.7.1.min.js"></script>
 <script>
     // Add focus effects to input containers
     const inputContainers = document.querySelectorAll('.form-input');
